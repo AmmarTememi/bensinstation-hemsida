@@ -1,5 +1,6 @@
 User-agent: *
 Allow: /
+Disallow: /admin
 
 # ✏️ Byt ut example.com mot din riktiga adress
 Sitemap: https://www.example.com/sitemap.xml

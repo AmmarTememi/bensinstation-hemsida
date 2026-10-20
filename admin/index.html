@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Al-Wafaa Admin</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="theme-color" content="#0F2A33">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23F4A100'/%3E%3Cpath d='M16 6c-4 5-7 8.5-7 12a7 7 0 0 0 14 0c0-3.5-3-7-7-12z' fill='%230F2A33'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600&family=Readex+Pro:wght@500;600;700&display=swap">
+<style>
+/* Layout: mörk topprad, en kolumn med bränslerader – samma färger som hemsidan. */
+:root{
+  --ink:#0F2A33; --petrol:#12505A; --amber:#F4A100; --amber-soft:#FFF3D6;
+  --paper:#F5F7F7; --card:#FFFFFF; --line:#DCE4E5; --text:#1D3036; --muted:#5A6D72;
+  --ok:#1E7A4C; --ok-soft:#E3F4EA; --err:#B3261E; --err-soft:#FBE9E7;
+  --f-display:"Readex Pro","IBM Plex Sans Arabic",Tahoma,"Segoe UI",sans-serif;
+  --f-body:"IBM Plex Sans Arabic",Tahoma,"Segoe UI",Arial,sans-serif;
+  color-scheme:light;
+}
+*,*::before,*::after{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{min-height:100%}
+body{margin:0;background:var(--paper);color:var(--text);font-family:var(--f-body);font-size:16px;line-height:1.6}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--ink)}
+h1,h2{font-family:var(--f-display);color:var(--ink);margin:0;line-height:1.3}
+.wrap{max-width:760px;margin-inline:auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+:focus-visible{outline:3px solid var(--amber);outline-offset:2px;border-radius:6px}
+.ltr{direction:ltr;unicode-bidi:isolate}
+
+/* Topprad */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--ink);color:#fff}
+.top .wrap{display:flex;align-items:center;gap:12px;min-height:60px}
+.brand{display:flex;align-items:center;gap:10px;font-family:var(--f-display);font-weight:600;margin-inline-end:auto;min-width:0}
+.brand-mark{width:32px;height:32px;border-radius:8px;background:var(--amber);display:grid;place-items:center;flex:none}
+.brand-mark svg{width:18px;height:18px}
+.brand small{display:block;font-family:var(--f-body);font-weight:400;color:#A9BEC2;font-size:.8rem;line-height:1.2}
+.top-btn{background:none;border:1px solid rgba(255,255,255,.28);color:#fff;border-radius:999px;padding:.35em .9em;font:500 .88rem var(--f-display);cursor:pointer;text-decoration:none;white-space:nowrap}
+.top-btn:hover{border-color:var(--amber);color:var(--amber)}
+
+/* Knappar och fält */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:.7em 1.4em;border-radius:12px;border:0;font:600 1rem var(--f-display);cursor:pointer}
+.btn-primary{background:var(--amber);color:var(--ink)}
+.btn-primary:hover{background:#FFB627}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+label{display:block;font-weight:600;color:var(--ink);margin-bottom:6px}
+input[type=email],input[type=password]{width:100%;min-height:48px;padding:.6em .9em;border:1px solid var(--line);border-radius:10px;font:inherit;background:#fff;color:var(--text)}
+input:focus{outline:none;border-color:var(--petrol);box-shadow:0 0 0 3px rgba(18,80,90,.15)}
+
+/* Inloggning */
+.login{padding-block:clamp(40px,10vh,96px)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:clamp(22px,4vw,34px)}
+.login .card{max-width:420px;margin-inline:auto;display:grid;gap:18px}
+.login p{color:var(--muted);margin:0}
+
+/* Meddelanden */
+.msg{border-radius:10px;padding:.7em 1em;font-weight:500}
+.msg.ok{background:var(--ok-soft);color:var(--ok)}
+.msg.err{background:var(--err-soft);color:var(--err)}
+
+/* Priser */
+.dash{padding-block:28px 120px;display:grid;gap:18px}
+.dash-head p{color:var(--muted);margin:4px 0 0}
+.rows{display:grid;gap:12px}
+.row{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;display:grid;grid-template-columns:1fr auto;gap:12px 16px;align-items:center;position:relative;overflow:hidden}
+.row::before{content:"";position:absolute;inset-block:0;inset-inline-start:0;width:5px;background:var(--nozzle,var(--petrol))}
+.row.dirty{border-color:var(--amber);box-shadow:0 0 0 2px var(--amber-soft)}
+.row-name{min-width:0}
+.row-name strong{display:block;font-family:var(--f-display);font-size:1.1rem;color:var(--ink)}
+.row-name small{color:var(--muted);font-size:.85rem}
+.price-field{display:flex;align-items:stretch;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:#fff;direction:ltr}
+.price-field:focus-within{border-color:var(--petrol);box-shadow:0 0 0 3px rgba(18,80,90,.15)}
+.price-field input{width:9ch;min-height:48px;border:0;padding:0 .7em;font:600 1.25rem var(--f-display);text-align:right;font-variant-numeric:tabular-nums;color:var(--ink);background:transparent}
+.price-field input:focus{outline:none;box-shadow:none}
+.price-field span{display:grid;place-items:center;padding:0 .8em;background:var(--paper);color:var(--muted);font:600 .85rem var(--f-display);border-inline-start:1px solid var(--line)}
+.row-foot{grid-column:1 / -1;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px;border-top:1px dashed var(--line);padding-top:10px}
+.switch{display:inline-flex;align-items:center;gap:10px;cursor:pointer;font-weight:500;margin:0;color:var(--text)}
+.switch input{appearance:none;width:44px;height:26px;border-radius:999px;background:#C9D3D5;position:relative;cursor:pointer;transition:background .15s;margin:0}
+.switch input::after{content:"";position:absolute;top:3px;inset-inline-start:3px;width:20px;height:20px;border-radius:50%;background:#fff;transition:inset-inline-start .15s}
+.switch input:checked{background:var(--ok)}
+.switch input:checked::after{inset-inline-start:21px}
+.updated{color:var(--muted);font-size:.82rem}
+@media (max-width:480px){.row{grid-template-columns:1fr}.price-field input{width:100%}}
+
+/* Sparfält */
+.savebar{position:fixed;inset-inline:0;bottom:0;z-index:20;background:var(--card);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom,0px)}
+.savebar .wrap{display:flex;align-items:center;gap:12px;min-height:72px}
+.savebar .status{margin-inline-end:auto;color:var(--muted);font-weight:500}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <div class="brand">
+      <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 2.5C8.6 7 6.5 10 6.5 13.2a5.5 5.5 0 0 0 11 0C17.5 10 15.4 7 12 2.5z" fill="#0F2A33"/></svg></span>
+      <span><span data-t="station"></span><small data-t="panel"></small></span>
+    </div>
+    <a class="top-btn" href="/" target="_blank" rel="noopener" data-t="viewSite"></a>
+    <button class="top-btn" type="button" id="langBtn"></button>
+    <button class="top-btn" type="button" id="logoutBtn" hidden data-t="logout"></button>
+  </div>
+</header>
+
+<!-- Inloggning -->
+<main class="wrap login" id="loginView" hidden>
+  <form class="card" id="loginForm" novalidate>
+    <div>
+      <h1 data-t="loginTitle"></h1>
+      <p data-t="loginHint"></p>
+    </div>
+    <div>
+      <label for="email" data-t="email"></label>
+      <input id="email" type="email" autocomplete="username" required dir="ltr">
+    </div>
+    <div>
+      <label for="password" data-t="password"></label>
+      <input id="password" type="password" autocomplete="current-password" required dir="ltr">
+    </div>
+    <div class="msg err" id="loginMsg" role="alert" hidden></div>
+    <button class="btn btn-primary" type="submit" id="loginBtn" data-t="login"></button>
+  </form>
+</main>
+
+<!-- Priser -->
+<main class="wrap dash" id="dashView" hidden>
+  <div class="dash-head">
+    <h1 data-t="pricesTitle"></h1>
+    <p data-t="pricesHint"></p>
+  </div>
+  <div class="msg err" id="dashMsg" role="alert" hidden></div>
+  <div class="rows" id="rows"></div>
+</main>
+
+<div class="savebar" id="saveBar" hidden>
+  <div class="wrap">
+    <span class="status" id="saveStatus" role="status" aria-live="polite"></span>
+    <button class="btn btn-primary" type="button" id="saveBtn" disabled data-t="save"></button>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+<script src="/config.js"></script>
+<script>
+(function(){
+  var T = {
+    ar: {
+      station:"محطة الوفاء للوقود", panel:"لوحة التحكم", viewSite:"عرض الموقع", logout:"تسجيل الخروج", langBtn:"English",
+      loginTitle:"تسجيل الدخول", loginHint:"أدخل بريدك الإلكتروني وكلمة المرور لإدارة أسعار الوقود.",
+      email:"البريد الإلكتروني", password:"كلمة المرور", login:"دخول", loggingIn:"جارٍ الدخول…",
+      badLogin:"البريد الإلكتروني أو كلمة المرور غير صحيحة.",
+      notAdmin:"هذا الحساب لا يملك صلاحية تعديل الأسعار. أضِفه إلى جدول admins في Supabase.",
+      pricesTitle:"أسعار الوقود", pricesHint:"الأسعار بالدينار العراقي لكل لتر. تظهر على الموقع فور الحفظ.",
+      available:"متوفر", unavailable:"غير متوفر", noPrice:"بدون سعر",
+      updated:"آخر تحديث:", save:"حفظ التغييرات", saving:"جارٍ الحفظ…",
+      saved:"تم الحفظ. الأسعار ظاهرة الآن على الموقع.", unsaved:function(n){return n===1?"تغيير واحد غير محفوظ":n+" تغييرات غير محفوظة";},
+      noChanges:"لا توجد تغييرات", saveErr:"تعذّر الحفظ. تحقّق من الاتصال وحاول مرة أخرى.",
+      loadErr:"تعذّر تحميل الأسعار. تحقّق من الاتصال وحدّث الصفحة.", badNum:"أدخل رقمًا صحيحًا بدون كسور (مثال: 1250).",
+      locale:"ar-IQ", nameKey:"name_ar"
+    },
+    en: {
+      station:"Al-Wafaa Gas Station", panel:"Admin panel", viewSite:"View site", logout:"Log out", langBtn:"العربية",
+      loginTitle:"Log in", loginHint:"Enter your email and password to manage fuel prices.",
+      email:"Email", password:"Password", login:"Log in", loggingIn:"Logging in…",
+      badLogin:"Wrong email or password.",
+      notAdmin:"This account can't change prices. Add it to the admins table in Supabase.",
+      pricesTitle:"Fuel prices", pricesHint:"Prices are in Iraqi dinar (IQD) per litre. They appear on the website as soon as you save.",
+      available:"Available", unavailable:"Unavailable", noPrice:"No price",
+      updated:"Last updated:", save:"Save changes", saving:"Saving…",
+      saved:"Saved. The prices are now live on the website.", unsaved:function(n){return n===1?"1 unsaved change":n+" unsaved changes";},
+      noChanges:"No changes", saveErr:"Couldn't save. Check your connection and try again.",
+      loadErr:"Couldn't load prices. Check your connection and reload the page.", badNum:"Enter a whole number without decimals (e.g. 1250).",
+      locale:"en-GB", nameKey:"name_en"
+    }
+  };
+  var NOZZLE = {regular:"#2E8B57", premium:"#1F6FB2", super:"#C0392B", diesel:"#2B2F33"};
+
+  var lang = "ar";
+  try { lang = localStorage.getItem("adminLang") || "ar"; } catch(e){}
+  var cfg = window.SITE_CONFIG || {};
+  var db = window.supabase.createClient(cfg.SUPABASE_URL, cfg.SUPABASE_ANON_KEY);
+  var rows = [];          // data från databasen
+  var $ = function(id){ return document.getElementById(id); };
+
+  function t(k){ return T[lang][k]; }
+  function applyLang(){
+    document.documentElement.lang = lang;
+    document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
+    document.querySelectorAll("[data-t]").forEach(function(el){ el.textContent = t(el.getAttribute("data-t")); });
+    $("langBtn").textContent = t("langBtn");
+    if (rows.length) render();
+    updateStatus();
+  }
+  $("langBtn").addEventListener("click", function(){
+    lang = lang === "ar" ? "en" : "ar";
+    try { localStorage.setItem("adminLang", lang); } catch(e){}
+    applyLang();
+  });
+
+  function show(view){
+    $("loginView").hidden = view !== "login";
+    $("dashView").hidden = view !== "dash";
+    $("saveBar").hidden = view !== "dash";
+    $("logoutBtn").hidden = view !== "dash";
+  }
+  function msg(el, text){ el.textContent = text || ""; el.hidden = !text; }
+
+  // ---------- Inloggning ----------
+  $("loginForm").addEventListener("submit", async function(e){
+    e.preventDefault();
+    msg($("loginMsg"));
+    var btn = $("loginBtn"); btn.disabled = true; btn.textContent = t("loggingIn");
+    var res = await db.auth.signInWithPassword({ email: $("email").value.trim(), password: $("password").value });
+    btn.disabled = false; btn.textContent = t("login");
+    if (res.error) { msg($("loginMsg"), t("badLogin")); return; }
+    $("password").value = "";
+    enter(res.data.user);
+  });
+  $("logoutBtn").addEventListener("click", async function(){
+    await db.auth.signOut(); rows = []; $("rows").innerHTML = ""; show("login");
+  });
+
+  async function enter(user){
+    var adm = await db.from("admins").select("user_id").eq("user_id", user.id).maybeSingle();
+    if (adm.error || !adm.data) { await db.auth.signOut(); show("login"); msg($("loginMsg"), t("notAdmin")); return; }
+    show("dash");
+    await load();
+  }
+
+  // ---------- Priser ----------
+  async function load(){
+    msg($("dashMsg"));
+    var res = await db.from("fuel_prices").select("*").order("sort");
+    if (res.error) { msg($("dashMsg"), t("loadErr")); return; }
+    rows = res.data.map(function(r){ return Object.assign({}, r, { draftPrice: r.price_iqd, draftAvail: r.available }); });
+    render(); updateStatus();
+  }
+
+  function fmtDate(iso){
+    return new Intl.DateTimeFormat(t("locale"), { day:"numeric", month:"short", year:"numeric", hour:"numeric", minute:"2-digit" }).format(new Date(iso));
+  }
+  function isDirty(r){ return r.draftPrice !== r.price_iqd || r.draftAvail !== r.available; }
+
+  function render(){
+    var box = $("rows"); box.innerHTML = "";
+    rows.forEach(function(r){
+      var el = document.createElement("div");
+      el.className = "row" + (isDirty(r) ? " dirty" : "");
+      el.style.setProperty("--nozzle", NOZZLE[r.slug] || "var(--petrol)");
+      var id = "p-" + r.slug, aid = "a-" + r.slug;
+      el.innerHTML =
+        '<div class="row-name"><strong></strong><small></small></div>' +
+        '<div class="price-field"><input id="'+id+'" inputmode="numeric" autocomplete="off" aria-label=""><span>IQD</span></div>' +
+        '<div class="row-foot"><label class="switch" for="'+aid+'"><input type="checkbox" id="'+aid+'"><span></span></label>' +
+        '<span class="updated"></span></div>';
+      el.querySelector("strong").textContent = r[t("nameKey")];
+      el.querySelector("small").textContent = lang === "ar" ? r.name_en : r.name_ar;
+      var inp = el.querySelector("input[inputmode]");
+      inp.setAttribute("aria-label", r[t("nameKey")] + " – IQD");
+      inp.placeholder = t("noPrice");
+      inp.value = r.draftPrice == null ? "" : String(r.draftPrice);
+      var chk = el.querySelector("input[type=checkbox]");
+      chk.checked = r.draftAvail;
+      el.querySelector(".switch span").textContent = r.draftAvail ? t("available") : t("unavailable");
+      el.querySelector(".updated").textContent = t("updated") + " " + fmtDate(r.updated_at);
+
+      inp.addEventListener("input", function(){
+        var raw = inp.value.replace(/[\s,.٬٫]/g, "")
+                           .replace(/[٠-٩]/g, function(d){ return d.charCodeAt(0) - 0x0660; }); // tillåt arabiska siffror
+        if (raw === "") r.draftPrice = null;
+        else if (/^\d+$/.test(raw)) r.draftPrice = parseInt(raw, 10);
+        else r.draftPrice = NaN;
+        el.classList.toggle("dirty", isDirty(r));
+        updateStatus();
+      });
+      chk.addEventListener("change", function(){
+        r.draftAvail = chk.checked;
+        el.querySelector(".switch span").textContent = r.draftAvail ? t("available") : t("unavailable");
+        el.classList.toggle("dirty", isDirty(r));
+        updateStatus();
+      });
+      box.appendChild(el);
+    });
+  }
+
+  function updateStatus(){
+    var dirty = rows.filter(isDirty);
+    var bad = dirty.some(function(r){ return Number.isNaN(r.draftPrice); });
+    $("saveBtn").disabled = !dirty.length || bad;
+    $("saveStatus").textContent = bad ? t("badNum") : (dirty.length ? t("unsaved")(dirty.length) : t("noChanges"));
+    $("saveStatus").style.color = bad ? "var(--err)" : "";
+  }
+
+  $("saveBtn").addEventListener("click", async function(){
+    var dirty = rows.filter(isDirty);
+    if (!dirty.length) return;
+    var btn = $("saveBtn"); btn.disabled = true; btn.textContent = t("saving");
+    msg($("dashMsg"));
+    var results = await Promise.all(dirty.map(function(r){
+      return db.from("fuel_prices").update({ price_iqd: r.draftPrice, available: r.draftAvail }).eq("slug", r.slug).select();
+    }));
+    btn.textContent = t("save");
+    var failed = results.some(function(res){ return res.error || !res.data || !res.data.length; });
+    if (failed) { msg($("dashMsg"), t("saveErr")); updateStatus(); return; }
+    await load();
+    $("saveStatus").textContent = t("saved");
+    $("saveStatus").style.color = "var(--ok)";
+  });
+
+  // Varna om man lämnar sidan med osparade ändringar
+  window.addEventListener("beforeunload", function(e){ if (rows.some(isDirty)) { e.preventDefault(); e.returnValue = ""; } });
+
+  // ---------- Start ----------
+  applyLang();
+  db.auth.getSession().then(function(res){
+    var s = res.data && res.data.session;
+    if (s) enter(s.user); else show("login");
+  });
+})();
+</script>
+</body>
+</html>

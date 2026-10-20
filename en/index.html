@@ -217,6 +217,13 @@ section.block{padding-block:clamp(56px,8vw,96px)}
 .fuel-icon svg{width:24px;height:24px}
 .fuel h4{font-family:var(--f-display);font-size:1.15rem;margin:0;color:var(--ink)}
 .fuel p{color:var(--muted);font-size:.95rem;margin-top:4px}
+.fuel-price{margin-top:14px;padding-top:12px;border-top:1px dashed var(--line);display:flex;align-items:baseline;flex-wrap:wrap;gap:4px 8px}
+.fuel-price strong{font-family:var(--f-display);font-size:1.7rem;font-weight:700;color:var(--ink);font-variant-numeric:tabular-nums;line-height:1.2}
+.fuel-price span{color:var(--muted);font-size:.9rem;font-weight:500}
+.fuel-price.is-off strong{font-size:1rem;color:var(--muted)}
+.fuel-price.is-off span{display:none}
+.fuel.is-unavailable .fuel-icon{filter:grayscale(1);opacity:.55}
+.prices-updated{margin-top:-24px;margin-bottom:clamp(40px,6vw,64px);color:var(--muted);font-size:.9rem}
 @media (max-width:900px){.fuels{grid-template-columns:repeat(2,1fr)}}
 @media (max-width:420px){.fuels{grid-template-columns:1fr}}
 
@@ -437,23 +444,28 @@ section.block{padding-block:clamp(56px,8vw,96px)}
     <h3 class="sub-h">Available fuels</h3>
     <!-- ✏️ BYT UT: lägg till/ta bort bränslen. Färgen styrs av --nozzle -->
     <div class="fuels">
-      <article class="fuel" style="--nozzle:#2E8B57">
+      <article class="fuel" data-fuel="regular" style="--nozzle:#2E8B57">
         <div class="fuel-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V5a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v16M3 21h12M6 9h6M14 8h2a2 2 0 0 1 2 2v6a1.5 1.5 0 0 0 3 0V8l-3-3"/></svg></div>
         <h4>Regular petrol</h4><p>For everyday driving</p>
+        <p class="fuel-price" data-unavailable="Currently unavailable" hidden><strong></strong><span>IQD / litre</span></p>
       </article>
-      <article class="fuel" style="--nozzle:#1F6FB2">
+      <article class="fuel" data-fuel="premium" style="--nozzle:#1F6FB2">
         <div class="fuel-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V5a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v16M3 21h12M6 9h6M14 8h2a2 2 0 0 1 2 2v6a1.5 1.5 0 0 0 3 0V8l-3-3"/></svg></div>
         <h4>Premium petrol</h4><p>Better engine performance</p>
+        <p class="fuel-price" data-unavailable="Currently unavailable" hidden><strong></strong><span>IQD / litre</span></p>
       </article>
-      <article class="fuel" style="--nozzle:#C0392B">
+      <article class="fuel" data-fuel="super" style="--nozzle:#C0392B">
         <div class="fuel-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V5a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v16M3 21h12M6 9h6M14 8h2a2 2 0 0 1 2 2v6a1.5 1.5 0 0 0 3 0V8l-3-3"/></svg></div>
         <h4>Super petrol</h4><p>For high-performance engines</p>
+        <p class="fuel-price" data-unavailable="Currently unavailable" hidden><strong></strong><span>IQD / litre</span></p>
       </article>
-      <article class="fuel" style="--nozzle:#2B2F33">
+      <article class="fuel" data-fuel="diesel" style="--nozzle:#2B2F33">
         <div class="fuel-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V5a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v16M3 21h12M6 9h6M14 8h2a2 2 0 0 1 2 2v6a1.5 1.5 0 0 0 3 0V8l-3-3"/></svg></div>
         <h4>Diesel</h4><p>For trucks and heavy vehicles</p>
+        <p class="fuel-price" data-unavailable="Currently unavailable" hidden><strong></strong><span>IQD / litre</span></p>
       </article>
     </div>
+    <p class="prices-updated" hidden>Prices last updated: <time></time></p>
 
     <h3 class="sub-h">Other services</h3>
     <!-- ✏️ BYT UT: ta bort de tjänster ni inte har (radera hela <article>…</article>) -->
@@ -583,6 +595,9 @@ section.block{padding-block:clamp(56px,8vw,96px)}
   </div>
 </footer>
 
+<!-- Priser från adminpanelen (Supabase) -->
+<script src="/config.js"></script>
+<script src="/prices.js" defer></script>
 <script>
 // Mobilmeny
 (function(){
