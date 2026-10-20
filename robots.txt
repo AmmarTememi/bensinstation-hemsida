@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# ✏️ Byt ut example.com mot din riktiga adress
+Sitemap: https://www.example.com/sitemap.xml

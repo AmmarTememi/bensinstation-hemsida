@@ -1,0 +1,589 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<!-- ✏️ BYT UT: stationens namn + stad i titel och beskrivning (viktigt för Google) -->
+<title>محطة النور للوقود</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="محطة النور للوقود في بغداد: بنزين عادي ومحسّن وسوبر وكاز، غسيل سيارات وتبديل زيوت وماركت. مفتوحة يوميًا. اعرف العنوان وأوقات العمل ورقم الهاتف.">
+<meta name="theme-color" content="#0F2A33">
+<!-- ✏️ BYT UT: din riktiga webbadress när sidan är publicerad -->
+<link rel="canonical" href="https://www.example.com/">
+<!-- Fler språk senare (se README):
+<link rel="alternate" hreflang="ar" href="https://www.example.com/">
+<link rel="alternate" hreflang="en" href="https://www.example.com/en/">
+<link rel="alternate" hreflang="ckb" href="https://www.example.com/ku/">
+-->
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ar_IQ">
+<meta property="og:title" content="محطة النور للوقود">
+<meta property="og:description" content="وقود موثوق وخدمة سريعة يوميًا. العنوان وأوقات العمل ورقم الهاتف.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23F4A100'/%3E%3Cpath d='M16 6c-4 5-7 8.5-7 12a7 7 0 0 0 14 0c0-3.5-3-7-7-12z' fill='%230F2A33'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600&family=Readex+Pro:wght@500;600;700&display=swap">
+
+<!-- Strukturerad data för Google (✏️ BYT UT alla värden) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "GasStation",
+  "name": "محطة النور للوقود",
+  "url": "https://www.example.com/",
+  "telephone": "+9647700000000",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "شارع المثال",
+    "addressLocality": "بغداد",
+    "addressCountry": "IQ"
+  },
+  "geo": { "@type": "GeoCoordinates", "latitude": 33.3152, "longitude": 44.3661 },
+  "openingHoursSpecification": [
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Saturday","Sunday","Monday","Tuesday","Wednesday","Thursday"], "opens": "06:00", "closes": "23:59" },
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": "Friday", "opens": "08:00", "closes": "23:59" }
+  ]
+}
+</script>
+
+<style>
+/* Layout: mörkt "forecourt"-band överst med illustration, ljusa sektioner under, bärnstensgul signalfärg för knappar och detaljer. */
+:root{
+  --ink:#0F2A33;        /* djup petroleumblå – rubriker, header, sidfot */
+  --petrol:#12505A;     /* sekundär mörk ton */
+  --amber:#F4A100;      /* signalfärg – knappar och markeringar */
+  --amber-soft:#FFF3D6;
+  --paper:#F5F7F7;      /* sidbakgrund */
+  --card:#FFFFFF;
+  --line:#DCE4E5;
+  --text:#1D3036;
+  --muted:#5A6D72;
+  --on-dark:#E8F0F1;
+  --on-dark-muted:#A9BEC2;
+
+  --f-display:"Readex Pro","IBM Plex Sans Arabic",Tahoma,"Segoe UI",sans-serif;
+  --f-body:"IBM Plex Sans Arabic",Tahoma,"Segoe UI",Arial,sans-serif;
+
+  --step-1:clamp(.95rem,.9rem + .2vw,1.05rem);
+  --step-2:clamp(1.15rem,1.05rem + .4vw,1.35rem);
+  --step-3:clamp(1.6rem,1.3rem + 1.2vw,2.3rem);
+  --step-4:clamp(2.1rem,1.6rem + 2.4vw,3.6rem);
+
+  --radius:14px;
+  --wrap:1160px;
+  --header-h:68px;
+  color-scheme:light;
+}
+*,*::before,*::after{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;scroll-padding-top:calc(var(--header-h) + 12px)}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{
+  margin:0;background:var(--paper);color:var(--text);
+  font-family:var(--f-body);font-size:var(--step-1);line-height:1.75;
+  -webkit-font-smoothing:antialiased;
+}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--ink)}
+img,svg{max-width:100%;display:block}
+a{color:inherit}
+h1,h2,h3{font-family:var(--f-display);line-height:1.25;margin:0;text-wrap:balance;color:var(--ink)}
+p{margin:0}
+.wrap{
+  max-width:var(--wrap);margin-inline:auto;
+  padding-left:max(16px,env(safe-area-inset-left,0px));
+  padding-right:max(16px,env(safe-area-inset-right,0px));
+}
+.ltr{direction:ltr;unicode-bidi:isolate;display:inline-block}
+:focus-visible{outline:3px solid var(--amber);outline-offset:3px;border-radius:6px}
+.skip{position:absolute;inset-inline-start:12px;top:-60px;background:var(--amber);color:var(--ink);padding:8px 14px;border-radius:8px;z-index:100;font-weight:600}
+.skip:focus{top:12px}
+
+/* Knappar */
+.btn{
+  display:inline-flex;align-items:center;gap:.55em;justify-content:center;
+  font-family:var(--f-display);font-weight:600;font-size:1rem;
+  padding:.8em 1.35em;border-radius:999px;text-decoration:none;
+  border:2px solid transparent;transition:background .15s,color .15s,border-color .15s;
+  min-height:48px;
+}
+.btn svg{width:20px;height:20px;flex:none}
+.btn-primary{background:var(--amber);color:var(--ink)}
+.btn-primary:hover{background:#FFB627}
+.btn-ghost{border-color:currentColor;color:var(--on-dark)}
+.btn-ghost:hover{background:rgba(255,255,255,.08)}
+.btn-dark{background:var(--ink);color:#fff}
+.btn-dark:hover{background:var(--petrol)}
+.btn-outline{border-color:var(--ink);color:var(--ink)}
+.btn-outline:hover{background:var(--ink);color:#fff}
+
+/* Header */
+.site-header{
+  position:sticky;top:env(safe-area-inset-top,0px);z-index:50;
+  background:var(--ink);color:var(--on-dark);
+  border-bottom:1px solid rgba(255,255,255,.08);
+}
+.site-header .wrap{display:flex;align-items:center;gap:20px;min-height:var(--header-h)}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:#fff;font-family:var(--f-display);font-weight:700;font-size:1.1rem;margin-inline-end:auto}
+.brand-mark{width:38px;height:38px;border-radius:10px;background:var(--amber);display:grid;place-items:center;flex:none}
+.brand-mark svg{width:22px;height:22px}
+.nav{display:flex;align-items:center;gap:4px}
+.nav a{text-decoration:none;color:var(--on-dark);padding:.5em .85em;border-radius:8px;font-weight:500}
+.nav a:hover{background:rgba(255,255,255,.08);color:#fff}
+.nav .btn{margin-inline-start:8px;padding:.55em 1.1em;min-height:42px}
+.nav-toggle{display:none;background:none;border:0;color:#fff;width:46px;height:46px;border-radius:10px;cursor:pointer;align-items:center;justify-content:center}
+.nav-toggle svg{width:26px;height:26px}
+@media (max-width:860px){
+  .nav-toggle{display:inline-flex}
+  .nav{
+    position:absolute;inset-inline:0;top:100%;
+    flex-direction:column;align-items:stretch;gap:2px;
+    background:var(--ink);border-top:1px solid rgba(255,255,255,.08);
+    padding-block:10px 18px;
+    padding-left:max(16px,env(safe-area-inset-left,0px));
+    padding-right:max(16px,env(safe-area-inset-right,0px));
+  }
+  .nav a{padding:.8em .9em;font-size:1.05rem}
+  .nav .btn{margin:8px 0 0}
+}
+
+/* Hero */
+.hero{background:var(--ink);color:var(--on-dark);overflow:hidden}
+.hero .wrap{
+  display:grid;grid-template-columns:1.05fr 1fr;gap:clamp(24px,4vw,56px);align-items:center;
+  padding-block:clamp(40px,7vw,88px) clamp(36px,6vw,72px);
+}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-weight:600;color:var(--amber);font-size:.95rem;margin-bottom:14px}
+.eyebrow::before{content:"";width:22px;height:3px;border-radius:2px;background:var(--amber)}
+.hero h1{color:#fff;font-size:var(--step-4);font-weight:700}
+.hero p.lead{margin-top:18px;font-size:var(--step-2);color:var(--on-dark);max-width:34ch;line-height:1.7}
+.hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+.hero-art{min-width:0;border-radius:20px;overflow:hidden;box-shadow:0 30px 60px -30px rgba(0,0,0,.6)}
+.hero-art svg{width:100%;height:auto}
+@media (max-width:860px){
+  .hero .wrap{grid-template-columns:1fr}
+  .hero-art{order:-1}
+}
+
+/* Infostrip */
+.quick{background:var(--petrol);color:var(--on-dark)}
+.quick ul{list-style:none;margin:0;display:grid;grid-template-columns:repeat(3,1fr);gap:0;padding-block:0}
+.quick li{display:flex;align-items:center;gap:12px;padding:18px 0;min-width:0}
+.quick li + li{border-inline-start:1px solid rgba(255,255,255,.14);padding-inline-start:22px}
+.quick svg{width:26px;height:26px;color:var(--amber);flex:none}
+.quick small{display:block;color:var(--on-dark-muted);font-size:.85rem;line-height:1.4}
+.quick strong{display:block;color:#fff;font-weight:600;line-height:1.5}
+.quick a{text-decoration:none}
+@media (max-width:760px){
+  .quick ul{grid-template-columns:1fr}
+  .quick li + li{border-inline-start:0;border-top:1px solid rgba(255,255,255,.14);padding-inline-start:0}
+}
+
+/* Sektioner */
+section.block{padding-block:clamp(56px,8vw,96px)}
+.section-head{max-width:640px;margin-bottom:clamp(28px,4vw,44px)}
+.section-head .eyebrow{color:var(--petrol)}
+.section-head .eyebrow::before{background:var(--amber)}
+.section-head h2{font-size:var(--step-3)}
+.section-head p{margin-top:12px;color:var(--muted);font-size:var(--step-2);line-height:1.7}
+
+/* Om oss */
+.about{display:grid;grid-template-columns:1.1fr 1fr;gap:clamp(28px,5vw,64px);align-items:start}
+.about-text p{max-width:62ch}
+.about-text p + p{margin-top:14px}
+.points{list-style:none;margin:0;padding:0;display:grid;gap:14px}
+.points li{display:flex;gap:14px;align-items:flex-start;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px}
+.points svg{width:24px;height:24px;color:var(--petrol);flex:none;margin-top:3px}
+.points strong{display:block;font-family:var(--f-display);color:var(--ink);font-weight:600}
+.points span{color:var(--muted);font-size:.95rem}
+@media (max-width:860px){.about{grid-template-columns:1fr}}
+
+/* Bränsle */
+.services-bg{background:var(--card);border-block:1px solid var(--line)}
+.sub-h{font-size:var(--step-2);margin-bottom:18px}
+.fuels{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:clamp(40px,6vw,64px)}
+.fuel{
+  position:relative;background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);
+  padding:22px 20px 20px;overflow:hidden;min-width:0;
+}
+.fuel::before{content:"";position:absolute;inset-inline:0;top:0;height:6px;background:var(--nozzle)}
+.fuel-icon{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;background:var(--nozzle);color:#fff;margin-bottom:14px}
+.fuel-icon svg{width:24px;height:24px}
+.fuel h4{font-family:var(--f-display);font-size:1.15rem;margin:0;color:var(--ink)}
+.fuel p{color:var(--muted);font-size:.95rem;margin-top:4px}
+@media (max-width:900px){.fuels{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:420px){.fuels{grid-template-columns:1fr}}
+
+/* Tjänster */
+.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.svc{display:flex;gap:16px;align-items:flex-start;padding:22px;border-radius:var(--radius);border:1px solid var(--line);background:var(--card);min-width:0}
+.svc-icon{width:52px;height:52px;border-radius:14px;background:var(--amber-soft);color:var(--ink);display:grid;place-items:center;flex:none}
+.svc-icon svg{width:28px;height:28px}
+.svc h4{font-family:var(--f-display);font-size:1.1rem;margin:0 0 4px;color:var(--ink)}
+.svc p{color:var(--muted);font-size:.95rem;line-height:1.65}
+@media (max-width:900px){.svc-grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:600px){.svc-grid{grid-template-columns:1fr}}
+
+/* Kontakt */
+.contact{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:stretch}
+.c-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:clamp(22px,3vw,32px);min-width:0;display:flex;flex-direction:column;gap:18px}
+.c-row{display:flex;gap:14px;align-items:flex-start}
+.c-row svg{width:24px;height:24px;color:var(--petrol);flex:none;margin-top:4px}
+.c-row small{display:block;color:var(--muted);font-size:.85rem}
+.c-row strong,.c-row a.big{display:block;font-family:var(--f-display);font-weight:600;font-size:1.15rem;color:var(--ink);text-decoration:none}
+.c-row a.big:hover{color:var(--petrol);text-decoration:underline}
+.c-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:auto}
+.map-card{
+  background:var(--ink);color:var(--on-dark);border-color:transparent;
+  background-image:
+    linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);
+  background-size:28px 28px;
+}
+.map-card h3{color:#fff;font-size:var(--step-2)}
+.map-card p{color:var(--on-dark-muted)}
+.pin{width:64px;height:64px;border-radius:50%;background:var(--amber);display:grid;place-items:center;color:var(--ink);box-shadow:0 0 0 10px rgba(244,161,0,.18)}
+.pin svg{width:30px;height:30px}
+.hours{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+.hours th,.hours td{padding:12px 0;border-bottom:1px solid var(--line);text-align:start;font-weight:500}
+.hours td{text-align:end;font-weight:600;color:var(--ink)}
+.hours tr:last-child th,.hours tr:last-child td{border-bottom:0}
+.hours-card{grid-column:1 / -1}
+.hours-card h3{font-size:var(--step-2)}
+@media (max-width:760px){.contact{grid-template-columns:1fr}}
+
+/* Sidfot */
+.site-footer{background:var(--ink);color:var(--on-dark-muted);padding-block:48px 28px}
+.f-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:32px}
+.site-footer h3{color:#fff;font-size:1.05rem;margin-bottom:12px}
+.site-footer ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.site-footer a{text-decoration:none;color:var(--on-dark)}
+.site-footer a:hover{color:var(--amber)}
+.f-brand p{margin-top:12px;max-width:36ch}
+.f-bottom{margin-top:36px;padding-top:20px;border-top:1px solid rgba(255,255,255,.1);font-size:.9rem;display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between}
+@media (max-width:760px){.f-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">انتقل إلى المحتوى</a>
+
+<!-- ============ HEADER / MENY ============ -->
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="#home" aria-label="الصفحة الرئيسية">
+      <!-- ✏️ BYT UT: logotyp. Ersätt <span class="brand-mark">…</span> med t.ex. <img src="images/logo.svg" alt="" width="38" height="38"> -->
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M12 2.5C8.6 7 6.5 10 6.5 13.2a5.5 5.5 0 0 0 11 0C17.5 10 15.4 7 12 2.5z" fill="#0F2A33"/></svg>
+      </span>
+      <span>محطة النور للوقود</span><!-- ✏️ BYT UT: namn -->
+    </a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav" aria-label="فتح القائمة">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+    <nav class="nav" id="nav" aria-label="القائمة الرئيسية">
+      <a href="#home">الرئيسية</a>
+      <a href="#about">من نحن</a>
+      <a href="#services">خدماتنا</a>
+      <a href="#contact">تواصل معنا</a>
+      <!-- ✏️ BYT UT: Google Maps-länk (samma länk finns på 4 ställen, se README) -->
+      <a class="btn btn-primary" href="https://www.google.com/maps/search/?api=1&amp;query=33.3152,44.3661" target="_blank" rel="noopener">الاتجاهات</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- ============ STARTSIDA ============ -->
+<section class="hero" id="home">
+  <div class="wrap">
+    <div>
+      <span class="eyebrow">محطة وقود · بغداد</span><!-- ✏️ BYT UT: stad -->
+      <h1>محطة النور للوقود</h1><!-- ✏️ BYT UT: namn -->
+      <p class="lead">وقود موثوق وخدمة سريعة كل يوم. فريق مدرَّب ومضخّات حديثة لتكملوا طريقكم بأمان وراحة.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="https://www.google.com/maps/search/?api=1&amp;query=33.3152,44.3661" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
+          اعرض الموقع على خرائط Google
+        </a>
+        <a class="btn btn-ghost" href="#services">تعرّف على خدماتنا</a>
+      </div>
+    </div>
+
+    <!-- BILD: illustration (laddar direkt, ingen bildfil). För ett riktigt foto, se README. -->
+    <div class="hero-art">
+      <svg viewBox="0 0 560 400" role="img" aria-label="رسم لمحطة وقود حديثة في المساء">
+        <defs>
+          <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#1B4A57"/><stop offset=".65" stop-color="#3E7A84"/><stop offset="1" stop-color="#E7B76A"/>
+          </linearGradient>
+          <linearGradient id="ground" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#2A3F45"/><stop offset="1" stop-color="#16262B"/>
+          </linearGradient>
+          <radialGradient id="glow" cx=".5" cy="0" r=".9">
+            <stop offset="0" stop-color="#FFF6DA" stop-opacity=".75"/><stop offset="1" stop-color="#FFF6DA" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+        <rect width="560" height="400" fill="url(#sky)"/>
+        <circle cx="96" cy="250" r="38" fill="#F7C873" opacity=".55"/>
+        <!-- palmer och horisont -->
+        <path d="M0 268h560v132H0z" fill="url(#ground)"/>
+        <g fill="#163A42" opacity=".85">
+          <rect x="34" y="200" width="5" height="70"/><path d="M36 200c-18-6-28 2-34 10 12-8 22-6 34-4zm0 0c16-10 30-6 38 2-14-6-24-6-38 2zm0 0c-8-14-2-26 6-32-4 12-4 20-6 32zm0 0c10-12 22-14 32-10-12 2-22 4-32 10z"/>
+          <rect x="508" y="210" width="5" height="60"/><path d="M510 210c-16-6-26 2-32 9 12-7 20-5 32-3zm0 0c14-9 27-5 35 2-13-5-22-5-35 1zm0 0c-7-13-1-24 6-29-4 11-4 18-6 29z"/>
+        </g>
+        <!-- prisskylt -->
+        <rect x="452" y="118" width="10" height="150" fill="#0F2A33"/>
+        <rect x="420" y="96" width="74" height="96" rx="8" fill="#0F2A33"/>
+        <rect x="428" y="104" width="58" height="18" rx="4" fill="#F4A100"/>
+        <g fill="#E8F0F1" opacity=".85"><rect x="430" y="132" width="54" height="10" rx="3"/><rect x="430" y="150" width="54" height="10" rx="3"/><rect x="430" y="168" width="54" height="10" rx="3"/></g>
+        <!-- tak (canopy) -->
+        <rect x="70" y="110" width="330" height="40" rx="6" fill="#F5F7F7"/>
+        <rect x="70" y="138" width="330" height="12" fill="#F4A100"/>
+        <rect x="70" y="150" width="330" height="5" fill="#0F2A33"/>
+        <path d="M92 155h286l40 120H52z" fill="url(#glow)" opacity=".55"/>
+        <!-- pelare -->
+        <rect x="128" y="155" width="12" height="120" fill="#C9D3D5"/>
+        <rect x="330" y="155" width="12" height="120" fill="#C9D3D5"/>
+        <!-- pumpar -->
+        <g>
+          <rect x="176" y="198" width="44" height="78" rx="6" fill="#F5F7F7"/>
+          <rect x="183" y="206" width="30" height="20" rx="3" fill="#0F2A33"/><rect x="187" y="212" width="18" height="4" rx="2" fill="#F4A100"/>
+          <rect x="176" y="236" width="44" height="8" fill="#12505A"/>
+          <path d="M220 214c12 0 14 10 14 22v26" stroke="#0F2A33" stroke-width="3" fill="none"/>
+        </g>
+        <g>
+          <rect x="252" y="198" width="44" height="78" rx="6" fill="#F5F7F7"/>
+          <rect x="259" y="206" width="30" height="20" rx="3" fill="#0F2A33"/><rect x="263" y="212" width="18" height="4" rx="2" fill="#F4A100"/>
+          <rect x="252" y="236" width="44" height="8" fill="#12505A"/>
+          <path d="M296 214c12 0 14 10 14 22v26" stroke="#0F2A33" stroke-width="3" fill="none"/>
+        </g>
+        <!-- ö och vägmarkering -->
+        <rect x="160" y="274" width="152" height="10" rx="3" fill="#8FA3A8"/>
+        <g fill="#F4A100" opacity=".8"><rect x="40" y="340" width="60" height="6" rx="3"/><rect x="150" y="340" width="60" height="6" rx="3"/><rect x="260" y="340" width="60" height="6" rx="3"/><rect x="370" y="340" width="60" height="6" rx="3"/><rect x="480" y="340" width="60" height="6" rx="3"/></g>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- Snabbinfo -->
+<div class="quick">
+  <div class="wrap">
+    <ul>
+      <li>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+        <div><small>أوقات العمل</small><strong>يوميًا من ٦ صباحًا</strong></div><!-- ✏️ BYT UT -->
+      </li>
+      <li>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>
+        <div><small>اتصل بنا</small><a href="tel:+9647700000000"><strong class="ltr">+964 770 000 0000</strong></a></div><!-- ✏️ BYT UT -->
+      </li>
+      <li>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
+        <div><small>العنوان</small><strong>شارع المثال، بغداد</strong></div><!-- ✏️ BYT UT -->
+      </li>
+    </ul>
+  </div>
+</div>
+
+<!-- ============ OM OSS ============ -->
+<section class="block" id="about">
+  <div class="wrap about">
+    <div class="about-text">
+      <div class="section-head">
+        <span class="eyebrow">من نحن</span>
+        <h2>محطة محلية تخدم الطريق وأهل المنطقة</h2>
+      </div>
+      <!-- ✏️ BYT UT: berätta kort om er (sedan när, familjeföretag, läge osv.) -->
+      <p>محطة النور للوقود محطة محلية تخدم سائقي المنطقة والمسافرين على الطريق. هدفنا بسيط: وقود مطابق للمواصفات، وتعبئة دقيقة، وخدمة سريعة ومحترمة لكل زبون.</p>
+      <p>نعمل على صيانة المضخّات بانتظام والحفاظ على نظافة المحطة، لتكون محطتكم المفضّلة في كل رحلة.</p>
+    </div>
+    <!-- ✏️ BYT UT: ändra eller ta bort punkter som inte stämmer -->
+    <ul class="points">
+      <li>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"/><path d="M9 12l2 2 4-4"/></svg>
+        <div><strong>وقود مطابق للمواصفات</strong><span>نستلم الوقود من مصادر معتمدة.</span></div>
+      </li>
+      <li>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 18a8 8 0 1 1 16 0"/><path d="M12 18l4-6"/></svg>
+        <div><strong>قياس دقيق</strong><span>مضخّات معايَرة لتحصلوا على كل لتر تدفعون ثمنه.</span></div>
+      </li>
+      <li>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="6" rx="2"/><path d="M5 11l2-5h10l2 5M7 17v2M17 17v2"/></svg>
+        <div><strong>دخول وخروج سهل</strong><span>مساحة واسعة للسيارات والمركبات الكبيرة.</span></div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ TJÄNSTER ============ -->
+<section class="block services-bg" id="services">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">خدماتنا</span>
+      <h2>كل ما تحتاجه سيارتك في مكان واحد</h2>
+      <p>تعبئة سريعة لجميع أنواع الوقود، وخدمات إضافية تجعل توقّفكم أسهل.</p>
+    </div>
+
+    <h3 class="sub-h">أنواع الوقود المتوفرة</h3>
+    <!-- ✏️ BYT UT: lägg till/ta bort bränslen. Färgen styrs av --nozzle -->
+    <div class="fuels">
+      <article class="fuel" style="--nozzle:#2E8B57">
+        <div class="fuel-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V5a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v16M3 21h12M6 9h6M14 8h2a2 2 0 0 1 2 2v6a1.5 1.5 0 0 0 3 0V8l-3-3"/></svg></div>
+        <h4>بنزين عادي</h4><p>للاستخدام اليومي</p>
+      </article>
+      <article class="fuel" style="--nozzle:#1F6FB2">
+        <div class="fuel-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V5a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v16M3 21h12M6 9h6M14 8h2a2 2 0 0 1 2 2v6a1.5 1.5 0 0 0 3 0V8l-3-3"/></svg></div>
+        <h4>بنزين محسّن</h4><p>أداء أفضل للمحرّك</p>
+      </article>
+      <article class="fuel" style="--nozzle:#C0392B">
+        <div class="fuel-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V5a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v16M3 21h12M6 9h6M14 8h2a2 2 0 0 1 2 2v6a1.5 1.5 0 0 0 3 0V8l-3-3"/></svg></div>
+        <h4>بنزين سوبر</h4><p>للمحرّكات عالية الأداء</p>
+      </article>
+      <article class="fuel" style="--nozzle:#2B2F33">
+        <div class="fuel-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V5a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v16M3 21h12M6 9h6M14 8h2a2 2 0 0 1 2 2v6a1.5 1.5 0 0 0 3 0V8l-3-3"/></svg></div>
+        <h4>كاز (ديزل)</h4><p>للشاحنات والمركبات الثقيلة</p>
+      </article>
+    </div>
+
+    <h3 class="sub-h">خدمات أخرى</h3>
+    <!-- ✏️ BYT UT: ta bort de tjänster ni inte har (radera hela <article>…</article>) -->
+    <div class="svc-grid">
+      <article class="svc">
+        <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 15l2-5h14l2 5v4H3z"/><circle cx="7.5" cy="19" r="1.5"/><circle cx="16.5" cy="19" r="1.5"/><path d="M8 3c-1 1.5-1.5 2.3-1.5 3a1.5 1.5 0 0 0 3 0c0-.7-.5-1.5-1.5-3zM16 3c-1 1.5-1.5 2.3-1.5 3a1.5 1.5 0 0 0 3 0c0-.7-.5-1.5-1.5-3z"/></svg></div>
+        <div><h4>غسيل السيارات</h4><p>غسيل خارجي وتنظيف داخلي سريع.</p></div>
+      </article>
+      <article class="svc">
+        <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10h9l4-3h3v3l-4 8H5a2 2 0 0 1-2-2z"/><path d="M19 13c-.8 1.2-1.2 1.9-1.2 2.5a1.2 1.2 0 0 0 2.4 0c0-.6-.4-1.3-1.2-2.5z"/></svg></div>
+        <div><h4>تبديل الزيوت</h4><p>تغيير زيت المحرّك والفلاتر.</p></div>
+      </article>
+      <article class="svc">
+        <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3.5"/><path d="M12 3v5.5M12 15.5V21M3 12h5.5M15.5 12H21"/></svg></div>
+        <div><h4>هواء وفحص الإطارات</h4><p>نفخ الإطارات وفحص الضغط مجانًا.</p></div>
+      </article>
+      <article class="svc">
+        <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8h14l-1 12H6z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg></div>
+        <div><h4>ماركت</h4><p>مشروبات ووجبات خفيفة واحتياجات الطريق.</p></div>
+      </article>
+      <article class="svc">
+        <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 21V12a7 7 0 0 1 14 0v9M3 21h18M12 3v2M10 21v-4a2 2 0 0 1 4 0v4"/></svg></div>
+        <div><h4>مصلّى</h4><p>مكان نظيف وهادئ للصلاة.</p></div>
+      </article>
+      <article class="svc">
+        <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 13h13v2a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5z"/><path d="M17 14h1.5a2.5 2.5 0 0 1 0 5H16M8 4c0 1.5 1.5 1.5 1.5 3S8 8.5 8 10M12 4c0 1.5 1.5 1.5 1.5 3S12 8.5 12 10"/></svg></div>
+        <div><h4>استراحة ودورات مياه</h4><p>مكان مريح للاستراحة أثناء السفر.</p></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ KONTAKT OCH HITTA HIT ============ -->
+<section class="block" id="contact">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">تواصل معنا</span>
+      <h2>زورونا أو اتصلوا بنا</h2>
+      <p>نسعد باستقبالكم. اضغطوا على الرقم للاتصال مباشرة، أو افتحوا الموقع على الخريطة.</p>
+    </div>
+
+    <div class="contact">
+      <div class="c-card">
+        <div class="c-row">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
+          <!-- ✏️ BYT UT: adress -->
+          <div><small>العنوان</small><strong>شارع المثال، حي المثال، بغداد، العراق</strong></div>
+        </div>
+        <div class="c-row">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>
+          <!-- ✏️ BYT UT: telefon (både href och synlig text) -->
+          <div><small>الهاتف</small><a class="big" href="tel:+9647700000000"><span class="ltr">+964 770 000 0000</span></a></div>
+        </div>
+        <div class="c-actions">
+          <a class="btn btn-dark" href="tel:+9647700000000">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>
+            اتصل الآن
+          </a>
+        </div>
+      </div>
+
+      <div class="c-card map-card">
+        <div class="pin"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg></div>
+        <div>
+          <h3>كيف تصل إلينا</h3>
+          <!-- ✏️ BYT UT: vägbeskrivning / landmärke -->
+          <p>بالقرب من دوار المثال، على الطريق الرئيسي باتجاه المدينة.</p>
+        </div>
+        <div class="c-actions">
+          <a class="btn btn-primary" href="https://www.google.com/maps/search/?api=1&amp;query=33.3152,44.3661" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6l6-2 6 2 6-2v14l-6 2-6-2-6 2z"/><path d="M9 4v14M15 6v14"/></svg>
+            افتح في خرائط Google
+          </a>
+        </div>
+      </div>
+
+      <div class="c-card hours-card">
+        <h3>أوقات العمل</h3>
+        <!-- ✏️ BYT UT: öppettider -->
+        <table class="hours">
+          <tbody>
+            <tr><th scope="row">السبت – الخميس</th><td>٦:٠٠ ص – ١٢:٠٠ منتصف الليل</td></tr>
+            <tr><th scope="row">الجمعة</th><td>٨:٠٠ ص – ١٢:٠٠ منتصف الليل</td></tr>
+            <tr><th scope="row">العطل الرسمية</th><td>حسب الإعلان</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ SIDFOT ============ -->
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="f-grid">
+      <div class="f-brand">
+        <a class="brand" href="#home">
+          <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 2.5C8.6 7 6.5 10 6.5 13.2a5.5 5.5 0 0 0 11 0C17.5 10 15.4 7 12 2.5z" fill="#0F2A33"/></svg></span>
+          <span>محطة النور للوقود</span><!-- ✏️ BYT UT -->
+        </a>
+        <p>وقود موثوق وخدمة سريعة كل يوم.</p>
+      </div>
+      <div>
+        <h3>روابط سريعة</h3>
+        <ul>
+          <li><a href="#home">الرئيسية</a></li>
+          <li><a href="#about">من نحن</a></li>
+          <li><a href="#services">خدماتنا</a></li>
+          <li><a href="#contact">تواصل معنا</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>معلومات الاتصال</h3>
+        <ul>
+          <li><a href="tel:+9647700000000"><span class="ltr">+964 770 000 0000</span></a></li><!-- ✏️ BYT UT -->
+          <li>شارع المثال، بغداد</li><!-- ✏️ BYT UT -->
+          <li><a href="https://www.google.com/maps/search/?api=1&amp;query=33.3152,44.3661" target="_blank" rel="noopener">الموقع على الخريطة</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="f-bottom">
+      <span>© <span id="year">2026</span> محطة النور للوقود. جميع الحقوق محفوظة.</span><!-- ✏️ BYT UT -->
+      <a href="#home">العودة إلى الأعلى ↑</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Mobilmeny
+(function(){
+  var btn=document.querySelector('.nav-toggle'), nav=document.getElementById('nav');
+  var mq=window.matchMedia('(max-width:860px)');
+  function set(open){btn.setAttribute('aria-expanded',open);nav.hidden=!open&&mq.matches;}
+  set(false);
+  btn.addEventListener('click',function(){set(btn.getAttribute('aria-expanded')!=='true');});
+  nav.addEventListener('click',function(e){if(e.target.closest('a')&&mq.matches)set(false);});
+  (mq.addEventListener?mq.addEventListener('change',function(){set(false);}):mq.addListener(function(){set(false);}));
+  document.getElementById('year').textContent=new Date().getFullYear();
+})();
+</script>
+</body>
+</html>
