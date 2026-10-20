@@ -40,14 +40,15 @@ Hemsidan använder en tecknad illustration så att den laddar direkt utan bildfi
 Logotyp: lägg `images/logo.svg` (eller `.png`) och ersätt `<span class="brand-mark">…</span>` med
 `<img src="images/logo.svg" alt="" width="38" height="38">`.
 
-## 3. Lägga till engelska och kurdiska senare
+## 3. Språk: arabiska och engelska
 
-Layouten använder "logiska" CSS-egenskaper, så den vänder automatiskt när riktningen ändras.
+- Arabisk version: `index.html` (adress `/`)
+- Engelsk version: `en/index.html` (adress `/en`)
+- Språkknappen sitter längst upp till höger i sidhuvudet på båda.
 
-1. Kopiera `index.html` till `en/index.html` och `ku/index.html`.
-2. Ändra första raden: engelska `<html lang="en" dir="ltr">`, kurdiska (sorani) `<html lang="ckb" dir="rtl">`.
-3. Översätt texterna. Ta bort kommentartecknen runt `hreflang`-raderna i `<head>` i alla tre filer.
-4. Lägg en språklänk i menyn, t.ex. `<a href="/en/">English</a>`.
+**Ändrar du uppgifter (telefon, adress, öppettider) – ändra i båda filerna.**
+
+**Kurdiska senare:** kopiera `index.html` till `ku/index.html`, ändra första raden till `<html lang="ckb" dir="rtl">`, översätt texterna, och lägg till en språkknapp och en `hreflang="ckb"`-rad som för engelskan.
 
 ## 4. Publicera på internet (gratis)
 

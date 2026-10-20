@@ -5,4 +5,8 @@
     <loc>https://www.example.com/</loc>
     <changefreq>monthly</changefreq>
   </url>
+  <url>
+    <loc>https://www.example.com/en</loc>
+    <changefreq>monthly</changefreq>
+  </url>
 </urlset>
