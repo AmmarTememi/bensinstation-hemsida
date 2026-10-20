@@ -277,7 +277,7 @@ section.block{padding-block:clamp(56px,8vw,96px)}
 @media (max-width:760px){.f-grid{grid-template-columns:1fr}}
 /* Innehåll från adminpanelen */
 [data-content]{white-space:pre-line}
-.hero-art img{width:100%;height:auto;aspect-ratio:7/5;object-fit:cover;display:block}
+.hero-art img{width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;display:block}
 .brand-logo{width:38px;height:38px;border-radius:10px;object-fit:contain;background:#fff;flex:none}
 .gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
 .gallery-grid figure{margin:0;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;min-width:0}
@@ -339,58 +339,9 @@ section.block{padding-block:clamp(56px,8vw,96px)}
       </div>
     </div>
 
-    <!-- BILD: illustration (laddar direkt, ingen bildfil). För ett riktigt foto, se README. -->
+    <!-- BILD: foto av stationen (images/hero.webp). Kan bytas i adminpanelen under الصور. -->
     <div class="hero-art">
-      <svg viewBox="0 0 560 400" role="img" aria-label="رسم لمحطة وقود حديثة في المساء">
-        <defs>
-          <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0" stop-color="#1B4A57"/><stop offset=".65" stop-color="#3E7A84"/><stop offset="1" stop-color="#E7B76A"/>
-          </linearGradient>
-          <linearGradient id="ground" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0" stop-color="#2A3F45"/><stop offset="1" stop-color="#16262B"/>
-          </linearGradient>
-          <radialGradient id="glow" cx=".5" cy="0" r=".9">
-            <stop offset="0" stop-color="#FFF6DA" stop-opacity=".75"/><stop offset="1" stop-color="#FFF6DA" stop-opacity="0"/>
-          </radialGradient>
-        </defs>
-        <rect width="560" height="400" fill="url(#sky)"/>
-        <circle cx="96" cy="250" r="38" fill="#F7C873" opacity=".55"/>
-        <!-- palmer och horisont -->
-        <path d="M0 268h560v132H0z" fill="url(#ground)"/>
-        <g fill="#163A42" opacity=".85">
-          <rect x="34" y="200" width="5" height="70"/><path d="M36 200c-18-6-28 2-34 10 12-8 22-6 34-4zm0 0c16-10 30-6 38 2-14-6-24-6-38 2zm0 0c-8-14-2-26 6-32-4 12-4 20-6 32zm0 0c10-12 22-14 32-10-12 2-22 4-32 10z"/>
-          <rect x="508" y="210" width="5" height="60"/><path d="M510 210c-16-6-26 2-32 9 12-7 20-5 32-3zm0 0c14-9 27-5 35 2-13-5-22-5-35 1zm0 0c-7-13-1-24 6-29-4 11-4 18-6 29z"/>
-        </g>
-        <!-- prisskylt -->
-        <rect x="452" y="118" width="10" height="150" fill="#0F2A33"/>
-        <rect x="420" y="96" width="74" height="96" rx="8" fill="#0F2A33"/>
-        <rect x="428" y="104" width="58" height="18" rx="4" fill="#F4A100"/>
-        <g fill="#E8F0F1" opacity=".85"><rect x="430" y="132" width="54" height="10" rx="3"/><rect x="430" y="150" width="54" height="10" rx="3"/><rect x="430" y="168" width="54" height="10" rx="3"/></g>
-        <!-- tak (canopy) -->
-        <rect x="70" y="110" width="330" height="40" rx="6" fill="#F5F7F7"/>
-        <rect x="70" y="138" width="330" height="12" fill="#F4A100"/>
-        <rect x="70" y="150" width="330" height="5" fill="#0F2A33"/>
-        <path d="M92 155h286l40 120H52z" fill="url(#glow)" opacity=".55"/>
-        <!-- pelare -->
-        <rect x="128" y="155" width="12" height="120" fill="#C9D3D5"/>
-        <rect x="330" y="155" width="12" height="120" fill="#C9D3D5"/>
-        <!-- pumpar -->
-        <g>
-          <rect x="176" y="198" width="44" height="78" rx="6" fill="#F5F7F7"/>
-          <rect x="183" y="206" width="30" height="20" rx="3" fill="#0F2A33"/><rect x="187" y="212" width="18" height="4" rx="2" fill="#F4A100"/>
-          <rect x="176" y="236" width="44" height="8" fill="#12505A"/>
-          <path d="M220 214c12 0 14 10 14 22v26" stroke="#0F2A33" stroke-width="3" fill="none"/>
-        </g>
-        <g>
-          <rect x="252" y="198" width="44" height="78" rx="6" fill="#F5F7F7"/>
-          <rect x="259" y="206" width="30" height="20" rx="3" fill="#0F2A33"/><rect x="263" y="212" width="18" height="4" rx="2" fill="#F4A100"/>
-          <rect x="252" y="236" width="44" height="8" fill="#12505A"/>
-          <path d="M296 214c12 0 14 10 14 22v26" stroke="#0F2A33" stroke-width="3" fill="none"/>
-        </g>
-        <!-- ö och vägmarkering -->
-        <rect x="160" y="274" width="152" height="10" rx="3" fill="#8FA3A8"/>
-        <g fill="#F4A100" opacity=".8"><rect x="40" y="340" width="60" height="6" rx="3"/><rect x="150" y="340" width="60" height="6" rx="3"/><rect x="260" y="340" width="60" height="6" rx="3"/><rect x="370" y="340" width="60" height="6" rx="3"/><rect x="480" y="340" width="60" height="6" rx="3"/></g>
-      </svg>
+      <img src="/images/hero.webp" srcset="/images/hero-800.webp 800w, /images/hero.webp 1400w" sizes="(max-width: 860px) 100vw, 560px" width="1400" height="1050" alt="محطة تعبئة وقود ديالى الوفاء ليلًا: مظلة المحطة ومضخة الوقود" fetchpriority="high" decoding="async">
     </div>
   </div>
 </section>
