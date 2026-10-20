@@ -1,5 +1,5 @@
 -- =====================================================================
--- Al-Wafaa Gas Station – databas för bränslepriser (Supabase)
+-- Diyala Al-Wafaa Gas Station – databas för bränslepriser (Supabase)
 -- Kör hela filen EN gång i Supabase: SQL Editor -> New query -> Run.
 -- =====================================================================
 
