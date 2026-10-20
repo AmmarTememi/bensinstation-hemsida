@@ -166,18 +166,18 @@ textarea.inp{min-height:96px;resize:vertical;line-height:1.6}
 <!-- Adminpanel -->
 <main class="wrap dash" id="dashView" hidden>
   <div class="tabs" role="tablist">
-    <button class="tab" role="tab" id="tab-prices" aria-controls="panel-prices" aria-selected="true" data-t="tabPrices"></button>
-    <button class="tab" role="tab" id="tab-texts" aria-controls="panel-texts" aria-selected="false" data-t="tabTexts"></button>
+    <button class="tab" role="tab" id="tab-prices" aria-controls="panel-prices" aria-selected="false" data-t="tabPrices" hidden></button>
+    <button class="tab" role="tab" id="tab-texts" aria-controls="panel-texts" aria-selected="true" data-t="tabTexts"></button>
     <button class="tab" role="tab" id="tab-images" aria-controls="panel-images" aria-selected="false" data-t="tabImages"></button>
   </div>
   <div class="msg err" id="dashMsg" role="alert" hidden></div>
 
-  <section id="panel-prices" role="tabpanel" aria-labelledby="tab-prices" class="stack">
+  <section id="panel-prices" role="tabpanel" aria-labelledby="tab-prices" class="stack" hidden>
     <div class="panel-head"><h1 data-t="pricesTitle"></h1><p data-t="pricesHint"></p></div>
     <div class="stack" id="priceRows"></div>
   </section>
 
-  <section id="panel-texts" role="tabpanel" aria-labelledby="tab-texts" class="stack" hidden>
+  <section id="panel-texts" role="tabpanel" aria-labelledby="tab-texts" class="stack">
     <div class="panel-head"><h1 data-t="textsTitle"></h1><p data-t="textsHint"></p></div>
     <div class="stack" id="textGroups"></div>
   </section>
@@ -304,7 +304,7 @@ textarea.inp{min-height:96px;resize:vertical;line-height:1.6}
   var prices = [];   // {slug, ..., draftPrice, draftAvail}
   var content = {};  // "key|lang" -> {value, draft}
   var gallery = [];  // {id, path, caption_ar, caption_en, draftAr, draftEn}
-  var tab = "prices";
+  var tab = "texts";
   var $ = function(id){ return document.getElementById(id); };
   function t(k){ return T[lang][k]; }
   function esc(s){ return String(s == null ? "" : s).replace(/[&<>"]/g, function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]; }); }

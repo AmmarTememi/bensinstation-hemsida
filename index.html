@@ -6,7 +6,7 @@
 <!-- ✏️ BYT UT: stationens namn + stad i titel och beskrivning (viktigt för Google) -->
 <title>محطة تعبئة وقود ديالى الوفاء | Diyala Al-Wafaa Gas Station</title>
 <meta name="claude:viewport-fit-sides" content="cover">
-<meta name="description" content="محطة تعبئة وقود ديالى الوفاء في بغداد: بنزين عادي ومحسّن وسوبر وكاز، غسيل سيارات وتبديل زيوت وماركت. مفتوحة يوميًا. اعرف العنوان وأوقات العمل ورقم الهاتف.">
+<meta name="description" content="محطة تعبئة وقود ديالى الوفاء في بغداد: بنزين عادي وكاز (ديزل)، غسيل سيارات وتبديل زيوت وماركت. مفتوحة يوميًا. اعرف العنوان وأوقات العمل ورقم الهاتف.">
 <meta name="theme-color" content="#0F2A33">
 <!-- ✏️ BYT UT: din riktiga webbadress när sidan är publicerad -->
 <link rel="canonical" href="https://www.example.com/">
@@ -207,7 +207,7 @@ section.block{padding-block:clamp(56px,8vw,96px)}
 /* Bränsle */
 .services-bg{background:var(--card);border-block:1px solid var(--line)}
 .sub-h{font-size:var(--step-2);margin-bottom:18px}
-.fuels{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:clamp(40px,6vw,64px)}
+.fuels{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-bottom:clamp(40px,6vw,64px)}
 .fuel{
   position:relative;background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);
   padding:22px 20px 20px;overflow:hidden;min-width:0;
@@ -460,25 +460,12 @@ section.block{padding-block:clamp(56px,8vw,96px)}
       <article class="fuel" data-fuel="regular" style="--nozzle:#2E8B57">
         <div class="fuel-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V5a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v16M3 21h12M6 9h6M14 8h2a2 2 0 0 1 2 2v6a1.5 1.5 0 0 0 3 0V8l-3-3"/></svg></div>
         <h4>بنزين عادي</h4><p>للاستخدام اليومي</p>
-        <p class="fuel-price" data-unavailable="غير متوفر حاليًا" hidden><strong></strong><span>د.ع / لتر</span></p>
-      </article>
-      <article class="fuel" data-fuel="premium" style="--nozzle:#1F6FB2">
-        <div class="fuel-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V5a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v16M3 21h12M6 9h6M14 8h2a2 2 0 0 1 2 2v6a1.5 1.5 0 0 0 3 0V8l-3-3"/></svg></div>
-        <h4>بنزين محسّن</h4><p>أداء أفضل للمحرّك</p>
-        <p class="fuel-price" data-unavailable="غير متوفر حاليًا" hidden><strong></strong><span>د.ع / لتر</span></p>
-      </article>
-      <article class="fuel" data-fuel="super" style="--nozzle:#C0392B">
-        <div class="fuel-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V5a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v16M3 21h12M6 9h6M14 8h2a2 2 0 0 1 2 2v6a1.5 1.5 0 0 0 3 0V8l-3-3"/></svg></div>
-        <h4>بنزين سوبر</h4><p>للمحرّكات عالية الأداء</p>
-        <p class="fuel-price" data-unavailable="غير متوفر حاليًا" hidden><strong></strong><span>د.ع / لتر</span></p>
       </article>
       <article class="fuel" data-fuel="diesel" style="--nozzle:#2B2F33">
         <div class="fuel-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V5a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v16M3 21h12M6 9h6M14 8h2a2 2 0 0 1 2 2v6a1.5 1.5 0 0 0 3 0V8l-3-3"/></svg></div>
         <h4>كاز (ديزل)</h4><p>للشاحنات والمركبات الثقيلة</p>
-        <p class="fuel-price" data-unavailable="غير متوفر حاليًا" hidden><strong></strong><span>د.ع / لتر</span></p>
       </article>
     </div>
-    <p class="prices-updated" hidden>آخر تحديث للأسعار: <time></time></p>
 
     <h3 class="sub-h">خدمات أخرى</h3>
     <!-- ✏️ BYT UT: ta bort de tjänster ni inte har (radera hela <article>…</article>) -->
@@ -619,9 +606,8 @@ section.block{padding-block:clamp(56px,8vw,96px)}
   </div>
 </footer>
 
-<!-- Priser från adminpanelen (Supabase) -->
+<!-- Texter och bilder från adminpanelen (Supabase) -->
 <script src="/config.js"></script>
-<script src="/prices.js" defer></script>
 <script src="/content.js" defer></script>
 <script>
 // Mobilmeny
