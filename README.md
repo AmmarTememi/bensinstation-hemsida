@@ -9,7 +9,7 @@ Allt du ska ändra är markerat med `✏️ BYT UT` i koden. Använd "Sök och e
 
 | Vad | Exempelvärde i filen | Var |
 |---|---|---|
-| Stationens namn | `محطة النور للوقود` | titel, meny, startsida, om oss, sidfot, Google-data |
+| Stationens namn | `محطة الوفاء للوقود` | titel, meny, startsida, om oss, sidfot, Google-data |
 | Stad | `بغداد` | startsida, adress, beskrivning |
 | Telefon (synlig) | `+964 770 000 0000` | snabbinfo, kontakt, sidfot |
 | Telefon (ringlänk) | `tel:+9647700000000` | samma ställen – utan mellanslag, med `+964` |
@@ -34,7 +34,7 @@ Hemsidan använder en tecknad illustration så att den laddar direkt utan bildfi
 2. Spara fotot som `hero.webp` eller `hero.jpg`, ca 1200 px brett och helst under 200 KB (komprimera gratis på squoosh.app).
 3. Ersätt hela `<svg …>…</svg>` inuti `<div class="hero-art">` med:
    ```html
-   <img src="images/hero.webp" alt="محطة النور للوقود" width="1200" height="860" fetchpriority="high">
+   <img src="images/hero.webp" alt="محطة الوفاء للوقود" width="1200" height="860" fetchpriority="high">
    ```
 
 Logotyp: lägg `images/logo.svg` (eller `.png`) och ersätt `<span class="brand-mark">…</span>` med
@@ -58,7 +58,7 @@ Layouten använder "logiska" CSS-egenskaper, så den vänder automatiskt när ri
 
 **Alternativ:** GitHub Pages eller Cloudflare Pages fungerar på samma sätt.
 
-**Eget domännamn** (t.ex. `alnoor-fuel.com`): köp det hos en domänleverantör och koppla det under "Domain settings" i Netlify. Uppdatera sedan `example.com` i filerna.
+**Eget domännamn** (t.ex. `alwafaa-station.com`): köp det hos en domänleverantör och koppla det under "Domain settings" i Netlify. Uppdatera sedan `example.com` i filerna.
 
 ## 5. Synas på Google
 
