@@ -275,6 +275,18 @@ section.block{padding-block:clamp(56px,8vw,96px)}
 .f-brand p{margin-top:12px;max-width:36ch}
 .f-bottom{margin-top:36px;padding-top:20px;border-top:1px solid rgba(255,255,255,.1);font-size:.9rem;display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between}
 @media (max-width:760px){.f-grid{grid-template-columns:1fr}}
+/* Innehåll från adminpanelen */
+[data-content]{white-space:pre-line}
+.hero-art img{width:100%;height:auto;aspect-ratio:7/5;object-fit:cover;display:block}
+.brand-logo{width:38px;height:38px;border-radius:10px;object-fit:contain;background:#fff;flex:none}
+.gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.gallery-grid figure{margin:0;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;min-width:0}
+.gallery-grid img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;background:var(--line)}
+.gallery-grid figcaption{padding:10px 14px;color:var(--muted);font-size:.95rem}
+.gallery-grid figcaption:empty{display:none}
+@media (max-width:900px){.gallery-grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:480px){.gallery-grid{grid-template-columns:1fr}}
+
 </style>
 </head>
 <body>
@@ -292,7 +304,7 @@ section.block{padding-block:clamp(56px,8vw,96px)}
       <span class="brand-mark" aria-hidden="true">
         <svg viewBox="0 0 24 24"><path d="M12 2.5C8.6 7 6.5 10 6.5 13.2a5.5 5.5 0 0 0 11 0C17.5 10 15.4 7 12 2.5z" fill="#0F2A33"/></svg>
       </span>
-      <span>محطة الوفاء للوقود</span><!-- ✏️ BYT UT: namn -->
+      <span data-content="station_name">محطة الوفاء للوقود</span><!-- ✏️ BYT UT: namn -->
     </a>
     <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav" aria-label="فتح القائمة">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
@@ -302,6 +314,7 @@ section.block{padding-block:clamp(56px,8vw,96px)}
       <a href="#about">من نحن</a>
       <a href="#services">خدماتنا</a>
       <a href="#contact">تواصل معنا</a>
+      <a href="#gallery" data-gallery-link hidden>معرض الصور</a>
       <!-- ✏️ BYT UT: Google Maps-länk (samma länk finns på 4 ställen, se README) -->
       <a class="btn btn-primary" href="https://www.google.com/maps/search/?api=1&amp;query=33.3152,44.3661" target="_blank" rel="noopener">الاتجاهات</a>
     </nav>
@@ -314,9 +327,9 @@ section.block{padding-block:clamp(56px,8vw,96px)}
 <section class="hero" id="home">
   <div class="wrap">
     <div>
-      <span class="eyebrow">محطة وقود · بغداد</span><!-- ✏️ BYT UT: stad -->
-      <h1>محطة الوفاء للوقود</h1><!-- ✏️ BYT UT: namn -->
-      <p class="lead">وقود موثوق وخدمة سريعة كل يوم. فريق مدرَّب ومضخّات حديثة لتكملوا طريقكم بأمان وراحة.</p>
+      <span data-content="hero_eyebrow" class="eyebrow">محطة وقود · بغداد</span><!-- ✏️ BYT UT: stad -->
+      <h1 data-content="hero_title">محطة الوفاء للوقود</h1><!-- ✏️ BYT UT: namn -->
+      <p data-content="hero_lead" class="lead">وقود موثوق وخدمة سريعة كل يوم. فريق مدرَّب ومضخّات حديثة لتكملوا طريقكم بأمان وراحة.</p>
       <div class="hero-actions">
         <a class="btn btn-primary" href="https://www.google.com/maps/search/?api=1&amp;query=33.3152,44.3661" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
@@ -388,15 +401,15 @@ section.block{padding-block:clamp(56px,8vw,96px)}
     <ul>
       <li>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
-        <div><small>أوقات العمل</small><strong>يوميًا من ٦ صباحًا</strong></div><!-- ✏️ BYT UT -->
+        <div><small>أوقات العمل</small><strong data-content="hours_short">يوميًا من ٦ صباحًا</strong></div><!-- ✏️ BYT UT -->
       </li>
       <li>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>
-        <div><small>اتصل بنا</small><a href="tel:+9647700000000"><strong class="ltr">+964 770 000 0000</strong></a></div><!-- ✏️ BYT UT -->
+        <div><small>اتصل بنا</small><a href="tel:+9647700000000"><strong class="ltr" data-global="phone">+964 770 000 0000</strong></a></div><!-- ✏️ BYT UT -->
       </li>
       <li>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
-        <div><small>العنوان</small><strong>شارع المثال، بغداد</strong></div><!-- ✏️ BYT UT -->
+        <div><small>العنوان</small><strong data-content="address_short">شارع المثال، بغداد</strong></div><!-- ✏️ BYT UT -->
       </li>
     </ul>
   </div>
@@ -408,11 +421,11 @@ section.block{padding-block:clamp(56px,8vw,96px)}
     <div class="about-text">
       <div class="section-head">
         <span class="eyebrow">من نحن</span>
-        <h2>محطة محلية تخدم الطريق وأهل المنطقة</h2>
+        <h2 data-content="about_title">محطة محلية تخدم الطريق وأهل المنطقة</h2>
       </div>
       <!-- ✏️ BYT UT: berätta kort om er (sedan när, familjeföretag, läge osv.) -->
-      <p>محطة الوفاء للوقود محطة محلية تخدم سائقي المنطقة والمسافرين على الطريق. هدفنا بسيط: وقود مطابق للمواصفات، وتعبئة دقيقة، وخدمة سريعة ومحترمة لكل زبون.</p>
-      <p>نعمل على صيانة المضخّات بانتظام والحفاظ على نظافة المحطة، لتكون محطتكم المفضّلة في كل رحلة.</p>
+      <p data-content="about_p1">محطة الوفاء للوقود محطة محلية تخدم سائقي المنطقة والمسافرين على الطريق. هدفنا بسيط: وقود مطابق للمواصفات، وتعبئة دقيقة، وخدمة سريعة ومحترمة لكل زبون.</p>
+      <p data-content="about_p2">نعمل على صيانة المضخّات بانتظام والحفاظ على نظافة المحطة، لتكون محطتكم المفضّلة في كل رحلة.</p>
     </div>
     <!-- ✏️ BYT UT: ändra eller ta bort punkter som inte stämmer -->
     <ul class="points">
@@ -438,7 +451,7 @@ section.block{padding-block:clamp(56px,8vw,96px)}
     <div class="section-head">
       <span class="eyebrow">خدماتنا</span>
       <h2>كل ما تحتاجه سيارتك في مكان واحد</h2>
-      <p>تعبئة سريعة لجميع أنواع الوقود، وخدمات إضافية تجعل توقّفكم أسهل.</p>
+      <p data-content="services_lead">تعبئة سريعة لجميع أنواع الوقود، وخدمات إضافية تجعل توقّفكم أسهل.</p>
     </div>
 
     <h3 class="sub-h">أنواع الوقود المتوفرة</h3>
@@ -498,6 +511,17 @@ section.block{padding-block:clamp(56px,8vw,96px)}
   </div>
 </section>
 
+<!-- ============ BILDGALLERI (fylls från adminpanelen, dolt när det är tomt) ============ -->
+<section class="block" id="gallery" hidden>
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">معرض الصور</span>
+      <h2>صور من المحطة</h2>
+    </div>
+    <div class="gallery-grid" id="galleryGrid"></div>
+  </div>
+</section>
+
 <!-- ============ KONTAKT OCH HITTA HIT ============ -->
 <section class="block" id="contact">
   <div class="wrap">
@@ -512,12 +536,12 @@ section.block{padding-block:clamp(56px,8vw,96px)}
         <div class="c-row">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
           <!-- ✏️ BYT UT: adress -->
-          <div><small>العنوان</small><strong>شارع المثال، حي المثال، بغداد، العراق</strong></div>
+          <div><small>العنوان</small><strong data-content="address_full">شارع المثال، حي المثال، بغداد، العراق</strong></div>
         </div>
         <div class="c-row">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>
           <!-- ✏️ BYT UT: telefon (både href och synlig text) -->
-          <div><small>الهاتف</small><a class="big" href="tel:+9647700000000"><span class="ltr">+964 770 000 0000</span></a></div>
+          <div><small>الهاتف</small><a class="big" href="tel:+9647700000000"><span class="ltr" data-global="phone">+964 770 000 0000</span></a></div>
         </div>
         <div class="c-actions">
           <a class="btn btn-dark" href="tel:+9647700000000">
@@ -532,7 +556,7 @@ section.block{padding-block:clamp(56px,8vw,96px)}
         <div>
           <h3>كيف تصل إلينا</h3>
           <!-- ✏️ BYT UT: vägbeskrivning / landmärke -->
-          <p>بالقرب من دوار المثال، على الطريق الرئيسي باتجاه المدينة.</p>
+          <p data-content="directions">بالقرب من دوار المثال، على الطريق الرئيسي باتجاه المدينة.</p>
         </div>
         <div class="c-actions">
           <a class="btn btn-primary" href="https://www.google.com/maps/search/?api=1&amp;query=33.3152,44.3661" target="_blank" rel="noopener">
@@ -547,9 +571,9 @@ section.block{padding-block:clamp(56px,8vw,96px)}
         <!-- ✏️ BYT UT: öppettider -->
         <table class="hours">
           <tbody>
-            <tr><th scope="row">السبت – الخميس</th><td>٦:٠٠ ص – ١٢:٠٠ منتصف الليل</td></tr>
-            <tr><th scope="row">الجمعة</th><td>٨:٠٠ ص – ١٢:٠٠ منتصف الليل</td></tr>
-            <tr><th scope="row">العطل الرسمية</th><td>حسب الإعلان</td></tr>
+            <tr><th data-content="hours_1_label" scope="row">السبت – الخميس</th><td data-content="hours_1_value">٦:٠٠ ص – ١٢:٠٠ منتصف الليل</td></tr>
+            <tr><th data-content="hours_2_label" scope="row">الجمعة</th><td data-content="hours_2_value">٨:٠٠ ص – ١٢:٠٠ منتصف الليل</td></tr>
+            <tr><th data-content="hours_3_label" scope="row">العطل الرسمية</th><td data-content="hours_3_value">حسب الإعلان</td></tr>
           </tbody>
         </table>
       </div>
@@ -566,9 +590,9 @@ section.block{padding-block:clamp(56px,8vw,96px)}
       <div class="f-brand">
         <a class="brand" href="#home">
           <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 2.5C8.6 7 6.5 10 6.5 13.2a5.5 5.5 0 0 0 11 0C17.5 10 15.4 7 12 2.5z" fill="#0F2A33"/></svg></span>
-          <span>محطة الوفاء للوقود</span><!-- ✏️ BYT UT -->
+          <span data-content="station_name">محطة الوفاء للوقود</span><!-- ✏️ BYT UT -->
         </a>
-        <p>وقود موثوق وخدمة سريعة كل يوم.</p>
+        <p data-content="footer_tagline">وقود موثوق وخدمة سريعة كل يوم.</p>
       </div>
       <div>
         <h3>روابط سريعة</h3>
@@ -582,8 +606,8 @@ section.block{padding-block:clamp(56px,8vw,96px)}
       <div>
         <h3>معلومات الاتصال</h3>
         <ul>
-          <li><a href="tel:+9647700000000"><span class="ltr">+964 770 000 0000</span></a></li><!-- ✏️ BYT UT -->
-          <li>شارع المثال، بغداد</li><!-- ✏️ BYT UT -->
+          <li><a href="tel:+9647700000000"><span class="ltr" data-global="phone">+964 770 000 0000</span></a></li><!-- ✏️ BYT UT -->
+          <li data-content="address_short">شارع المثال، بغداد</li><!-- ✏️ BYT UT -->
           <li><a href="https://www.google.com/maps/search/?api=1&amp;query=33.3152,44.3661" target="_blank" rel="noopener">الموقع على الخريطة</a></li>
         </ul>
       </div>
@@ -598,6 +622,7 @@ section.block{padding-block:clamp(56px,8vw,96px)}
 <!-- Priser från adminpanelen (Supabase) -->
 <script src="/config.js"></script>
 <script src="/prices.js" defer></script>
+<script src="/content.js" defer></script>
 <script>
 // Mobilmeny
 (function(){

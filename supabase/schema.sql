@@ -82,3 +82,54 @@ on conflict (slug) do nothing;
 -- insert into public.admins (user_id)
 --   select id from auth.users where email = 'DIN-EPOST@example.com'
 -- on conflict do nothing;
+
+-- =====================================================================
+-- 7. TEXTER OCH BILDER (adminpanelens flikar "Texter" och "Bilder")
+-- =====================================================================
+create table if not exists public.site_content (
+  key        text not null,
+  lang       text not null check (lang in ('ar','en','all')),
+  value      text not null default '',
+  updated_at timestamptz not null default now(),
+  primary key (key, lang)
+);
+create trigger site_content_touch before update on public.site_content
+  for each row execute function public.touch_updated_at();
+alter table public.site_content enable row level security;
+create policy "Alla kan läsa texter" on public.site_content for select to anon, authenticated using (true);
+create policy "Admins kan lägga till texter" on public.site_content for insert to authenticated
+  with check (exists (select 1 from public.admins a where a.user_id = (select auth.uid())));
+create policy "Admins kan ändra texter" on public.site_content for update to authenticated
+  using (exists (select 1 from public.admins a where a.user_id = (select auth.uid())))
+  with check (exists (select 1 from public.admins a where a.user_id = (select auth.uid())));
+
+create table if not exists public.gallery_images (
+  id         uuid primary key default gen_random_uuid(),
+  path       text not null,
+  caption_ar text not null default '',
+  caption_en text not null default '',
+  sort       integer not null default 0,
+  created_at timestamptz not null default now()
+);
+alter table public.gallery_images enable row level security;
+create policy "Alla kan se galleriet" on public.gallery_images for select to anon, authenticated using (true);
+create policy "Admins kan lägga till bilder" on public.gallery_images for insert to authenticated
+  with check (exists (select 1 from public.admins a where a.user_id = (select auth.uid())));
+create policy "Admins kan ändra bilder" on public.gallery_images for update to authenticated
+  using (exists (select 1 from public.admins a where a.user_id = (select auth.uid())))
+  with check (exists (select 1 from public.admins a where a.user_id = (select auth.uid())));
+create policy "Admins kan ta bort bilder" on public.gallery_images for delete to authenticated
+  using (exists (select 1 from public.admins a where a.user_id = (select auth.uid())));
+
+insert into storage.buckets (id, name, public, file_size_limit, allowed_mime_types)
+values ('site-images', 'site-images', true, 5242880, array['image/jpeg','image/png','image/webp'])
+on conflict (id) do nothing;
+create policy "Admins laddar upp bilder" on storage.objects for insert to authenticated
+  with check (bucket_id = 'site-images' and exists (select 1 from public.admins a where a.user_id = (select auth.uid())));
+create policy "Admins ändrar bilder" on storage.objects for update to authenticated
+  using (bucket_id = 'site-images' and exists (select 1 from public.admins a where a.user_id = (select auth.uid())));
+create policy "Admins tar bort bilder" on storage.objects for delete to authenticated
+  using (bucket_id = 'site-images' and exists (select 1 from public.admins a where a.user_id = (select auth.uid())));
+create policy "Admins ser bilder i lagringen" on storage.objects for select to authenticated
+  using (bucket_id = 'site-images' and exists (select 1 from public.admins a where a.user_id = (select auth.uid())));
+-- Startvärden för texterna läggs in av adminpanelen/Claude (se site_content i databasen).

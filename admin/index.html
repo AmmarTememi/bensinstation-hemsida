@@ -12,7 +12,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600&family=Readex+Pro:wght@500;600;700&display=swap">
 <style>
-/* Layout: mörk topprad, en kolumn med bränslerader – samma färger som hemsidan. */
+/* Layout: mörk topprad, flikar (priser / texter / bilder), en kolumn – samma färger som hemsidan. */
 :root{
   --ink:#0F2A33; --petrol:#12505A; --amber:#F4A100; --amber-soft:#FFF3D6;
   --paper:#F5F7F7; --card:#FFFFFF; --line:#DCE4E5; --text:#1D3036; --muted:#5A6D72;
@@ -23,17 +23,15 @@
 }
 *,*::before,*::after{box-sizing:border-box}
 [hidden]{display:none!important}
-html,body{min-height:100%}
 body{margin:0;background:var(--paper);color:var(--text);font-family:var(--f-body);font-size:16px;line-height:1.6}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--ink)}
-h1,h2{font-family:var(--f-display);color:var(--ink);margin:0;line-height:1.3}
-.wrap{max-width:760px;margin-inline:auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--f-display);color:var(--ink);margin:0;line-height:1.3}
+.wrap{max-width:820px;margin-inline:auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
 :focus-visible{outline:3px solid var(--amber);outline-offset:2px;border-radius:6px}
-.ltr{direction:ltr;unicode-bidi:isolate}
 
 /* Topprad */
 .top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--ink);color:#fff}
-.top .wrap{display:flex;align-items:center;gap:12px;min-height:60px}
+.top .wrap{display:flex;align-items:center;gap:10px;min-height:60px;flex-wrap:wrap}
 .brand{display:flex;align-items:center;gap:10px;font-family:var(--f-display);font-weight:600;margin-inline-end:auto;min-width:0}
 .brand-mark{width:32px;height:32px;border-radius:8px;background:var(--amber);display:grid;place-items:center;flex:none}
 .brand-mark svg{width:18px;height:18px}
@@ -42,29 +40,39 @@ h1,h2{font-family:var(--f-display);color:var(--ink);margin:0;line-height:1.3}
 .top-btn:hover{border-color:var(--amber);color:var(--amber)}
 
 /* Knappar och fält */
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:.7em 1.4em;border-radius:12px;border:0;font:600 1rem var(--f-display);cursor:pointer}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:.6em 1.2em;border-radius:12px;border:0;font:600 .98rem var(--f-display);cursor:pointer;text-decoration:none}
 .btn-primary{background:var(--amber);color:var(--ink)}
 .btn-primary:hover{background:#FFB627}
+.btn-ghost{background:var(--card);color:var(--ink);border:1px solid var(--line)}
+.btn-ghost:hover{border-color:var(--ink)}
+.btn-danger{background:var(--card);color:var(--err);border:1px solid var(--line)}
+.btn-danger:hover{border-color:var(--err)}
 .btn:disabled{opacity:.5;cursor:not-allowed}
+.btn svg{width:18px;height:18px}
 label{display:block;font-weight:600;color:var(--ink);margin-bottom:6px}
-input[type=email],input[type=password]{width:100%;min-height:48px;padding:.6em .9em;border:1px solid var(--line);border-radius:10px;font:inherit;background:#fff;color:var(--text)}
-input:focus{outline:none;border-color:var(--petrol);box-shadow:0 0 0 3px rgba(18,80,90,.15)}
+.inp{width:100%;min-height:46px;padding:.55em .85em;border:1px solid var(--line);border-radius:10px;font:inherit;background:#fff;color:var(--text)}
+textarea.inp{min-height:96px;resize:vertical;line-height:1.6}
+.inp:focus{outline:none;border-color:var(--petrol);box-shadow:0 0 0 3px rgba(18,80,90,.15)}
+.inp.dirty{border-color:var(--amber);box-shadow:0 0 0 2px var(--amber-soft)}
 
 /* Inloggning */
 .login{padding-block:clamp(40px,10vh,96px)}
-.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:clamp(22px,4vw,34px)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:clamp(20px,4vw,30px)}
 .login .card{max-width:420px;margin-inline:auto;display:grid;gap:18px}
 .login p{color:var(--muted);margin:0}
-
-/* Meddelanden */
 .msg{border-radius:10px;padding:.7em 1em;font-weight:500}
-.msg.ok{background:var(--ok-soft);color:var(--ok)}
 .msg.err{background:var(--err-soft);color:var(--err)}
+.msg.ok{background:var(--ok-soft);color:var(--ok)}
+
+/* Flikar */
+.dash{padding-block:20px 120px;display:grid;gap:18px}
+.tabs{display:flex;gap:6px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:5px;position:sticky;top:calc(env(safe-area-inset-top,0px) + 60px);z-index:10}
+.tab{flex:1;min-height:44px;border:0;border-radius:10px;background:none;font:600 1rem var(--f-display);color:var(--muted);cursor:pointer}
+.tab[aria-selected="true"]{background:var(--ink);color:#fff}
+.panel-head p{color:var(--muted);margin:4px 0 0}
+.stack{display:grid;gap:12px}
 
 /* Priser */
-.dash{padding-block:28px 120px;display:grid;gap:18px}
-.dash-head p{color:var(--muted);margin:4px 0 0}
-.rows{display:grid;gap:12px}
 .row{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;display:grid;grid-template-columns:1fr auto;gap:12px 16px;align-items:center;position:relative;overflow:hidden}
 .row::before{content:"";position:absolute;inset-block:0;inset-inline-start:0;width:5px;background:var(--nozzle,var(--petrol))}
 .row.dirty{border-color:var(--amber);box-shadow:0 0 0 2px var(--amber-soft)}
@@ -74,7 +82,7 @@ input:focus{outline:none;border-color:var(--petrol);box-shadow:0 0 0 3px rgba(18
 .price-field{display:flex;align-items:stretch;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:#fff;direction:ltr}
 .price-field:focus-within{border-color:var(--petrol);box-shadow:0 0 0 3px rgba(18,80,90,.15)}
 .price-field input{width:9ch;min-height:48px;border:0;padding:0 .7em;font:600 1.25rem var(--f-display);text-align:right;font-variant-numeric:tabular-nums;color:var(--ink);background:transparent}
-.price-field input:focus{outline:none;box-shadow:none}
+.price-field input:focus{outline:none}
 .price-field span{display:grid;place-items:center;padding:0 .8em;background:var(--paper);color:var(--muted);font:600 .85rem var(--f-display);border-inline-start:1px solid var(--line)}
 .row-foot{grid-column:1 / -1;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px;border-top:1px dashed var(--line);padding-top:10px}
 .switch{display:inline-flex;align-items:center;gap:10px;cursor:pointer;font-weight:500;margin:0;color:var(--text)}
@@ -85,10 +93,39 @@ input:focus{outline:none;border-color:var(--petrol);box-shadow:0 0 0 3px rgba(18
 .updated{color:var(--muted);font-size:.82rem}
 @media (max-width:480px){.row{grid-template-columns:1fr}.price-field input{width:100%}}
 
+/* Texter */
+.group{display:grid;gap:16px}
+.group h2{font-size:1.15rem}
+.field{display:grid;gap:8px}
+.field > label{margin:0}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.pair > div{min-width:0}
+.pair small{display:block;color:var(--muted);font-size:.78rem;font-weight:600;margin-bottom:4px;letter-spacing:.02em}
+.hint{color:var(--muted);font-size:.85rem;margin:0}
+@media (max-width:620px){.pair{grid-template-columns:1fr}}
+
+/* Bilder */
+.slot{display:grid;grid-template-columns:200px 1fr;gap:18px;align-items:center}
+.slot-img{aspect-ratio:7/5;border-radius:12px;background:var(--paper) repeating-linear-gradient(45deg,transparent 0 10px,rgba(15,42,51,.04) 10px 20px);border:1px dashed var(--line);display:grid;place-items:center;overflow:hidden;color:var(--muted);font-size:.85rem;text-align:center;padding:6px}
+.slot-img img{width:100%;height:100%;object-fit:cover}
+.slot-img.logo{aspect-ratio:1;max-width:120px}
+.slot-img.logo img{object-fit:contain;background:#fff}
+.slot-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+@media (max-width:560px){.slot{grid-template-columns:1fr}}
+.file-btn{position:relative;overflow:hidden}
+.file-btn input{position:absolute;inset:0;opacity:0;cursor:pointer;font-size:0}
+.gal{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
+.gal-item{background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;display:grid}
+.gal-item img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;background:var(--paper)}
+.gal-item .body{padding:10px;display:grid;gap:8px}
+.gal-item .inp{min-height:40px;font-size:.92rem}
+.gal-empty{color:var(--muted);padding:24px;text-align:center;border:1px dashed var(--line);border-radius:12px}
+.busy{color:var(--petrol);font-weight:600}
+
 /* Sparfält */
 .savebar{position:fixed;inset-inline:0;bottom:0;z-index:20;background:var(--card);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom,0px)}
 .savebar .wrap{display:flex;align-items:center;gap:12px;min-height:72px}
-.savebar .status{margin-inline-end:auto;color:var(--muted);font-weight:500}
+.savebar .status{margin-inline-end:auto;color:var(--muted);font-weight:500;min-width:0}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 </head>
@@ -115,25 +152,48 @@ input:focus{outline:none;border-color:var(--petrol);box-shadow:0 0 0 3px rgba(18
     </div>
     <div>
       <label for="email" data-t="email"></label>
-      <input id="email" type="email" autocomplete="username" required dir="ltr">
+      <input class="inp" id="email" type="email" autocomplete="username" required dir="ltr">
     </div>
     <div>
       <label for="password" data-t="password"></label>
-      <input id="password" type="password" autocomplete="current-password" required dir="ltr">
+      <input class="inp" id="password" type="password" autocomplete="current-password" required dir="ltr">
     </div>
     <div class="msg err" id="loginMsg" role="alert" hidden></div>
     <button class="btn btn-primary" type="submit" id="loginBtn" data-t="login"></button>
   </form>
 </main>
 
-<!-- Priser -->
+<!-- Adminpanel -->
 <main class="wrap dash" id="dashView" hidden>
-  <div class="dash-head">
-    <h1 data-t="pricesTitle"></h1>
-    <p data-t="pricesHint"></p>
+  <div class="tabs" role="tablist">
+    <button class="tab" role="tab" id="tab-prices" aria-controls="panel-prices" aria-selected="true" data-t="tabPrices"></button>
+    <button class="tab" role="tab" id="tab-texts" aria-controls="panel-texts" aria-selected="false" data-t="tabTexts"></button>
+    <button class="tab" role="tab" id="tab-images" aria-controls="panel-images" aria-selected="false" data-t="tabImages"></button>
   </div>
   <div class="msg err" id="dashMsg" role="alert" hidden></div>
-  <div class="rows" id="rows"></div>
+
+  <section id="panel-prices" role="tabpanel" aria-labelledby="tab-prices" class="stack">
+    <div class="panel-head"><h1 data-t="pricesTitle"></h1><p data-t="pricesHint"></p></div>
+    <div class="stack" id="priceRows"></div>
+  </section>
+
+  <section id="panel-texts" role="tabpanel" aria-labelledby="tab-texts" class="stack" hidden>
+    <div class="panel-head"><h1 data-t="textsTitle"></h1><p data-t="textsHint"></p></div>
+    <div class="stack" id="textGroups"></div>
+  </section>
+
+  <section id="panel-images" role="tabpanel" aria-labelledby="tab-images" class="stack" hidden>
+    <div class="panel-head"><h1 data-t="imagesTitle"></h1><p data-t="imagesHint"></p></div>
+    <div class="card group" id="slotHero"></div>
+    <div class="card group" id="slotLogo"></div>
+    <div class="card group">
+      <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between">
+        <div><h2 data-t="galleryTitle"></h2><p class="hint" data-t="galleryHint"></p></div>
+        <label class="btn btn-primary file-btn" style="margin:0"><span data-t="addImages"></span><input type="file" id="galleryInput" accept="image/*" multiple></label>
+      </div>
+      <div class="gal" id="galleryList"></div>
+    </div>
+  </section>
 </main>
 
 <div class="savebar" id="saveBar" hidden>
@@ -147,52 +207,117 @@ input:focus{outline:none;border-color:var(--petrol);box-shadow:0 0 0 3px rgba(18
 <script src="/config.js"></script>
 <script>
 (function(){
+  // ================= Översättningar för panelen =================
   var T = {
     ar: {
       station:"محطة الوفاء للوقود", panel:"لوحة التحكم", viewSite:"عرض الموقع", logout:"تسجيل الخروج", langBtn:"English",
-      loginTitle:"تسجيل الدخول", loginHint:"أدخل بريدك الإلكتروني وكلمة المرور لإدارة أسعار الوقود.",
+      loginTitle:"تسجيل الدخول", loginHint:"أدخل بريدك الإلكتروني وكلمة المرور لإدارة الموقع.",
       email:"البريد الإلكتروني", password:"كلمة المرور", login:"دخول", loggingIn:"جارٍ الدخول…",
       badLogin:"البريد الإلكتروني أو كلمة المرور غير صحيحة.",
-      notAdmin:"هذا الحساب لا يملك صلاحية تعديل الأسعار. أضِفه إلى جدول admins في Supabase.",
+      notAdmin:"هذا الحساب لا يملك صلاحية الإدارة.",
+      tabPrices:"الأسعار", tabTexts:"النصوص", tabImages:"الصور",
       pricesTitle:"أسعار الوقود", pricesHint:"الأسعار بالدينار العراقي لكل لتر. تظهر على الموقع فور الحفظ.",
-      available:"متوفر", unavailable:"غير متوفر", noPrice:"بدون سعر",
-      updated:"آخر تحديث:", save:"حفظ التغييرات", saving:"جارٍ الحفظ…",
-      saved:"تم الحفظ. الأسعار ظاهرة الآن على الموقع.", unsaved:function(n){return n===1?"تغيير واحد غير محفوظ":n+" تغييرات غير محفوظة";},
-      noChanges:"لا توجد تغييرات", saveErr:"تعذّر الحفظ. تحقّق من الاتصال وحاول مرة أخرى.",
-      loadErr:"تعذّر تحميل الأسعار. تحقّق من الاتصال وحدّث الصفحة.", badNum:"أدخل رقمًا صحيحًا بدون كسور (مثال: 1250).",
+      available:"متوفر", unavailable:"غير متوفر", noPrice:"بدون سعر", updated:"آخر تحديث:",
+      textsTitle:"نصوص الموقع", textsHint:"عدّل النص بالعربية والإنجليزية. اترك الحقل كما هو إذا لم ترد تغييره.",
+      imagesTitle:"الصور", imagesHint:"تُضغط الصور تلقائيًا قبل الرفع. تُحفظ فورًا وتظهر على الموقع مباشرة.",
+      heroTitle:"الصورة الرئيسية", heroHint:"تظهر في أعلى الصفحة الرئيسية. يُفضّل صورة أفقية للمحطة.",
+      logoTitle:"الشعار", logoHint:"يظهر بجانب اسم المحطة في أعلى الصفحة وأسفلها. يُفضّل شعار مربع.",
+      noImage:"لا توجد صورة، يظهر الرسم الافتراضي", upload:"رفع صورة", replace:"تغيير الصورة", remove:"إزالة",
+      galleryTitle:"معرض الصور", galleryHint:"تظهر هذه الصور في قسم «معرض الصور» على الموقع.", addImages:"إضافة صور",
+      galleryEmpty:"لا توجد صور بعد. اضغط «إضافة صور».", captionAr:"وصف بالعربية", captionEn:"Caption in English",
+      confirmDelete:"حذف هذه الصورة نهائيًا من الموقع؟", uploading:"جارٍ رفع الصور…", uploaded:"تم رفع الصورة وهي ظاهرة الآن على الموقع.",
+      deleted:"تم حذف الصورة.", imgErr:"تعذّر رفع الصورة. استخدم صورة JPG أو PNG أو WebP وحاول مرة أخرى.",
+      save:"حفظ التغييرات", saving:"جارٍ الحفظ…", saved:"تم الحفظ. التغييرات ظاهرة الآن على الموقع.",
+      unsaved:function(n){return n===1?"تغيير واحد غير محفوظ":n+" تغييرات غير محفوظة";}, noChanges:"لا توجد تغييرات",
+      saveErr:"تعذّر الحفظ. تحقّق من الاتصال وحاول مرة أخرى.", loadErr:"تعذّر تحميل البيانات. تحقّق من الاتصال وحدّث الصفحة.",
+      badNum:"أدخل رقمًا صحيحًا بدون كسور (مثال: 1250).", badUrl:"رابط الخريطة يجب أن يبدأ بـ https://",
       locale:"ar-IQ", nameKey:"name_ar"
     },
     en: {
       station:"Al-Wafaa Gas Station", panel:"Admin panel", viewSite:"View site", logout:"Log out", langBtn:"العربية",
-      loginTitle:"Log in", loginHint:"Enter your email and password to manage fuel prices.",
+      loginTitle:"Log in", loginHint:"Enter your email and password to manage the website.",
       email:"Email", password:"Password", login:"Log in", loggingIn:"Logging in…",
-      badLogin:"Wrong email or password.",
-      notAdmin:"This account can't change prices. Add it to the admins table in Supabase.",
+      badLogin:"Wrong email or password.", notAdmin:"This account doesn't have admin access.",
+      tabPrices:"Prices", tabTexts:"Texts", tabImages:"Images",
       pricesTitle:"Fuel prices", pricesHint:"Prices are in Iraqi dinar (IQD) per litre. They appear on the website as soon as you save.",
-      available:"Available", unavailable:"Unavailable", noPrice:"No price",
-      updated:"Last updated:", save:"Save changes", saving:"Saving…",
-      saved:"Saved. The prices are now live on the website.", unsaved:function(n){return n===1?"1 unsaved change":n+" unsaved changes";},
-      noChanges:"No changes", saveErr:"Couldn't save. Check your connection and try again.",
-      loadErr:"Couldn't load prices. Check your connection and reload the page.", badNum:"Enter a whole number without decimals (e.g. 1250).",
+      available:"Available", unavailable:"Unavailable", noPrice:"No price", updated:"Last updated:",
+      textsTitle:"Website texts", textsHint:"Edit the Arabic and English text. Leave a field as it is if you don't want to change it.",
+      imagesTitle:"Images", imagesHint:"Images are compressed automatically before upload. They are saved right away and appear on the website immediately.",
+      heroTitle:"Main image", heroHint:"Shown at the top of the home page. A landscape photo of the station works best.",
+      logoTitle:"Logo", logoHint:"Shown next to the station name in the header and footer. A square logo works best.",
+      noImage:"No image – the default illustration is shown", upload:"Upload image", replace:"Change image", remove:"Remove",
+      galleryTitle:"Gallery", galleryHint:"These photos appear in the Gallery section of the website.", addImages:"Add images",
+      galleryEmpty:"No images yet. Click “Add images”.", captionAr:"وصف بالعربية", captionEn:"Caption in English",
+      confirmDelete:"Permanently delete this image from the website?", uploading:"Uploading images…", uploaded:"Image uploaded and now live on the website.",
+      deleted:"Image deleted.", imgErr:"Couldn't upload the image. Use a JPG, PNG or WebP image and try again.",
+      save:"Save changes", saving:"Saving…", saved:"Saved. The changes are now live on the website.",
+      unsaved:function(n){return n===1?"1 unsaved change":n+" unsaved changes";}, noChanges:"No changes",
+      saveErr:"Couldn't save. Check your connection and try again.", loadErr:"Couldn't load the data. Check your connection and reload the page.",
+      badNum:"Enter a whole number without decimals (e.g. 1250).", badUrl:"The map link must start with https://",
       locale:"en-GB", nameKey:"name_en"
     }
   };
-  var NOZZLE = {regular:"#2E8B57", premium:"#1F6FB2", super:"#C0392B", diesel:"#2B2F33"};
 
+  // ================= Vilka texter som går att ändra =================
+  // global: samma värde på båda språken
+  var GROUPS = [
+    { ar:"الصفحة الرئيسية", en:"Home page", fields:[
+      { key:"station_name", ar:"اسم المحطة", en:"Station name" },
+      { key:"hero_eyebrow", ar:"السطر الصغير فوق العنوان", en:"Small line above the title" },
+      { key:"hero_title", ar:"العنوان الرئيسي", en:"Main title" },
+      { key:"hero_lead", ar:"النص التعريفي", en:"Intro text", long:true }
+    ]},
+    { ar:"من نحن", en:"About us", fields:[
+      { key:"about_title", ar:"العنوان", en:"Heading" },
+      { key:"about_p1", ar:"الفقرة الأولى", en:"First paragraph", long:true },
+      { key:"about_p2", ar:"الفقرة الثانية", en:"Second paragraph", long:true }
+    ]},
+    { ar:"الخدمات", en:"Services", fields:[
+      { key:"services_lead", ar:"النص تحت العنوان", en:"Text under the heading", long:true }
+    ]},
+    { ar:"التواصل والموقع", en:"Contact and location", fields:[
+      { key:"phone", ar:"رقم الهاتف", en:"Phone number", global:true, dir:"ltr", hint:{ar:"مثال: ‎+964 770 123 4567", en:"Example: +964 770 123 4567"} },
+      { key:"maps_url", ar:"رابط خرائط Google", en:"Google Maps link", global:true, dir:"ltr", url:true,
+        hint:{ar:"افتح موقع المحطة في خرائط Google، اضغط «مشاركة» ثم «نسخ الرابط» والصقه هنا.", en:"Open the station in Google Maps, tap Share, then Copy link, and paste it here."} },
+      { key:"address_short", ar:"العنوان المختصر", en:"Short address" },
+      { key:"address_full", ar:"العنوان الكامل", en:"Full address" },
+      { key:"directions", ar:"كيف تصل إلينا", en:"How to find us", long:true },
+      { key:"hours_short", ar:"أوقات العمل المختصرة (أعلى الصفحة)", en:"Short opening hours (top of page)" }
+    ]},
+    { ar:"جدول أوقات العمل", en:"Opening hours table", fields:[
+      { key:"hours_1_label", ar:"السطر ١: الأيام", en:"Row 1: days" }, { key:"hours_1_value", ar:"السطر ١: الأوقات", en:"Row 1: hours" },
+      { key:"hours_2_label", ar:"السطر ٢: الأيام", en:"Row 2: days" }, { key:"hours_2_value", ar:"السطر ٢: الأوقات", en:"Row 2: hours" },
+      { key:"hours_3_label", ar:"السطر ٣: الأيام", en:"Row 3: days" }, { key:"hours_3_value", ar:"السطر ٣: الأوقات", en:"Row 3: hours" }
+    ]},
+    { ar:"أسفل الصفحة", en:"Footer", fields:[
+      { key:"footer_tagline", ar:"الجملة تحت اسم المحطة", en:"Line under the station name" }
+    ]}
+  ];
+  var NOZZLE = {regular:"#2E8B57", premium:"#1F6FB2", super:"#C0392B", diesel:"#2B2F33"};
+  var BUCKET = "site-images";
+
+  // ================= Tillstånd =================
   var lang = "ar";
   try { lang = localStorage.getItem("adminLang") || "ar"; } catch(e){}
   var cfg = window.SITE_CONFIG || {};
   var db = window.supabase.createClient(cfg.SUPABASE_URL, cfg.SUPABASE_ANON_KEY);
-  var rows = [];          // data från databasen
+  var prices = [];   // {slug, ..., draftPrice, draftAvail}
+  var content = {};  // "key|lang" -> {value, draft}
+  var gallery = [];  // {id, path, caption_ar, caption_en, draftAr, draftEn}
+  var tab = "prices";
   var $ = function(id){ return document.getElementById(id); };
-
   function t(k){ return T[lang][k]; }
+  function esc(s){ return String(s == null ? "" : s).replace(/[&<>"]/g, function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]; }); }
+  function imgUrl(path){ return db.storage.from(BUCKET).getPublicUrl(path).data.publicUrl; }
+  function msg(el, text, kind){ el.textContent = text || ""; el.hidden = !text; el.className = "msg " + (kind || "err"); }
+
+  // ================= Språk och vyer =================
   function applyLang(){
     document.documentElement.lang = lang;
     document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
     document.querySelectorAll("[data-t]").forEach(function(el){ el.textContent = t(el.getAttribute("data-t")); });
     $("langBtn").textContent = t("langBtn");
-    if (rows.length) render();
+    if (prices.length) { renderPrices(); renderTexts(); renderImages(); }
     updateStatus();
   }
   $("langBtn").addEventListener("click", function(){
@@ -200,16 +325,23 @@ input:focus{outline:none;border-color:var(--petrol);box-shadow:0 0 0 3px rgba(18
     try { localStorage.setItem("adminLang", lang); } catch(e){}
     applyLang();
   });
-
   function show(view){
     $("loginView").hidden = view !== "login";
     $("dashView").hidden = view !== "dash";
     $("saveBar").hidden = view !== "dash";
     $("logoutBtn").hidden = view !== "dash";
   }
-  function msg(el, text){ el.textContent = text || ""; el.hidden = !text; }
+  ["prices","texts","images"].forEach(function(name){
+    $("tab-" + name).addEventListener("click", function(){
+      tab = name;
+      ["prices","texts","images"].forEach(function(n){
+        $("tab-" + n).setAttribute("aria-selected", n === name);
+        $("panel-" + n).hidden = n !== name;
+      });
+    });
+  });
 
-  // ---------- Inloggning ----------
+  // ================= Inloggning =================
   $("loginForm").addEventListener("submit", async function(e){
     e.preventDefault();
     msg($("loginMsg"));
@@ -221,100 +353,239 @@ input:focus{outline:none;border-color:var(--petrol);box-shadow:0 0 0 3px rgba(18
     enter(res.data.user);
   });
   $("logoutBtn").addEventListener("click", async function(){
-    await db.auth.signOut(); rows = []; $("rows").innerHTML = ""; show("login");
+    if (dirtyCount() && !confirm(t("unsaved")(dirtyCount()) + " – OK?")) return;
+    await db.auth.signOut(); prices = []; content = {}; gallery = []; show("login");
   });
-
   async function enter(user){
     var adm = await db.from("admins").select("user_id").eq("user_id", user.id).maybeSingle();
     if (adm.error || !adm.data) { await db.auth.signOut(); show("login"); msg($("loginMsg"), t("notAdmin")); return; }
     show("dash");
-    await load();
+    await loadAll();
   }
 
-  // ---------- Priser ----------
-  async function load(){
+  async function loadAll(){
     msg($("dashMsg"));
-    var res = await db.from("fuel_prices").select("*").order("sort");
-    if (res.error) { msg($("dashMsg"), t("loadErr")); return; }
-    rows = res.data.map(function(r){ return Object.assign({}, r, { draftPrice: r.price_iqd, draftAvail: r.available }); });
-    render(); updateStatus();
+    var r = await Promise.all([
+      db.from("fuel_prices").select("*").order("sort"),
+      db.from("site_content").select("key,lang,value"),
+      db.from("gallery_images").select("*").order("sort").order("created_at")
+    ]);
+    if (r.some(function(x){ return x.error; })) { msg($("dashMsg"), t("loadErr")); return; }
+    prices = r[0].data.map(function(p){ return Object.assign({}, p, { draftPrice:p.price_iqd, draftAvail:p.available }); });
+    content = {};
+    r[1].data.forEach(function(c){ content[c.key + "|" + c.lang] = { value:c.value, draft:c.value }; });
+    gallery = r[2].data.map(function(g){ return Object.assign({}, g, { draftAr:g.caption_ar, draftEn:g.caption_en }); });
+    renderPrices(); renderTexts(); renderImages(); updateStatus();
   }
 
-  function fmtDate(iso){
-    return new Intl.DateTimeFormat(t("locale"), { day:"numeric", month:"short", year:"numeric", hour:"numeric", minute:"2-digit" }).format(new Date(iso));
-  }
-  function isDirty(r){ return r.draftPrice !== r.price_iqd || r.draftAvail !== r.available; }
-
-  function render(){
-    var box = $("rows"); box.innerHTML = "";
-    rows.forEach(function(r){
+  // ================= Priser =================
+  function priceDirty(p){ return p.draftPrice !== p.price_iqd || p.draftAvail !== p.available; }
+  function fmtDate(iso){ return new Intl.DateTimeFormat(t("locale"), { day:"numeric", month:"short", year:"numeric", hour:"numeric", minute:"2-digit" }).format(new Date(iso)); }
+  function renderPrices(){
+    var box = $("priceRows"); box.innerHTML = "";
+    prices.forEach(function(p){
       var el = document.createElement("div");
-      el.className = "row" + (isDirty(r) ? " dirty" : "");
-      el.style.setProperty("--nozzle", NOZZLE[r.slug] || "var(--petrol)");
-      var id = "p-" + r.slug, aid = "a-" + r.slug;
+      el.className = "row" + (priceDirty(p) ? " dirty" : "");
+      el.style.setProperty("--nozzle", NOZZLE[p.slug] || "var(--petrol)");
       el.innerHTML =
-        '<div class="row-name"><strong></strong><small></small></div>' +
-        '<div class="price-field"><input id="'+id+'" inputmode="numeric" autocomplete="off" aria-label=""><span>IQD</span></div>' +
-        '<div class="row-foot"><label class="switch" for="'+aid+'"><input type="checkbox" id="'+aid+'"><span></span></label>' +
-        '<span class="updated"></span></div>';
-      el.querySelector("strong").textContent = r[t("nameKey")];
-      el.querySelector("small").textContent = lang === "ar" ? r.name_en : r.name_ar;
-      var inp = el.querySelector("input[inputmode]");
-      inp.setAttribute("aria-label", r[t("nameKey")] + " – IQD");
+        '<div class="row-name"><strong>' + esc(p[t("nameKey")]) + '</strong><small>' + esc(lang === "ar" ? p.name_en : p.name_ar) + '</small></div>' +
+        '<div class="price-field"><input id="p-' + p.slug + '" inputmode="numeric" autocomplete="off"><span>IQD</span></div>' +
+        '<div class="row-foot"><label class="switch" for="a-' + p.slug + '"><input type="checkbox" id="a-' + p.slug + '"><span></span></label>' +
+        '<span class="updated">' + esc(t("updated") + " " + fmtDate(p.updated_at)) + '</span></div>';
+      var inp = el.querySelector("input[inputmode]"), chk = el.querySelector("input[type=checkbox]"), lab = el.querySelector(".switch span");
+      inp.setAttribute("aria-label", p[t("nameKey")] + " – IQD");
       inp.placeholder = t("noPrice");
-      inp.value = r.draftPrice == null ? "" : String(r.draftPrice);
-      var chk = el.querySelector("input[type=checkbox]");
-      chk.checked = r.draftAvail;
-      el.querySelector(".switch span").textContent = r.draftAvail ? t("available") : t("unavailable");
-      el.querySelector(".updated").textContent = t("updated") + " " + fmtDate(r.updated_at);
-
+      inp.value = p.draftPrice == null || Number.isNaN(p.draftPrice) ? "" : String(p.draftPrice);
+      chk.checked = p.draftAvail; lab.textContent = p.draftAvail ? t("available") : t("unavailable");
       inp.addEventListener("input", function(){
-        var raw = inp.value.replace(/[\s,.٬٫]/g, "")
-                           .replace(/[٠-٩]/g, function(d){ return d.charCodeAt(0) - 0x0660; }); // tillåt arabiska siffror
-        if (raw === "") r.draftPrice = null;
-        else if (/^\d+$/.test(raw)) r.draftPrice = parseInt(raw, 10);
-        else r.draftPrice = NaN;
-        el.classList.toggle("dirty", isDirty(r));
-        updateStatus();
+        var raw = inp.value.replace(/[\s,.٬٫]/g, "").replace(/[٠-٩]/g, function(d){ return d.charCodeAt(0) - 0x0660; });
+        p.draftPrice = raw === "" ? null : (/^\d+$/.test(raw) ? parseInt(raw, 10) : NaN);
+        el.classList.toggle("dirty", priceDirty(p)); updateStatus();
       });
       chk.addEventListener("change", function(){
-        r.draftAvail = chk.checked;
-        el.querySelector(".switch span").textContent = r.draftAvail ? t("available") : t("unavailable");
-        el.classList.toggle("dirty", isDirty(r));
-        updateStatus();
+        p.draftAvail = chk.checked; lab.textContent = p.draftAvail ? t("available") : t("unavailable");
+        el.classList.toggle("dirty", priceDirty(p)); updateStatus();
       });
       box.appendChild(el);
     });
   }
 
-  function updateStatus(){
-    var dirty = rows.filter(isDirty);
-    var bad = dirty.some(function(r){ return Number.isNaN(r.draftPrice); });
-    $("saveBtn").disabled = !dirty.length || bad;
-    $("saveStatus").textContent = bad ? t("badNum") : (dirty.length ? t("unsaved")(dirty.length) : t("noChanges"));
-    $("saveStatus").style.color = bad ? "var(--err)" : "";
+  // ================= Texter =================
+  function cItem(key, l){ var k = key + "|" + l; if (!content[k]) content[k] = { value:null, draft:"" }; return content[k]; }
+  function cDirty(c){ return (c.draft || "") !== (c.value || ""); }
+  function makeInput(item, f, l, id){
+    var el = document.createElement(f.long ? "textarea" : "input");
+    el.className = "inp" + (cDirty(item) ? " dirty" : ""); el.id = id;
+    el.dir = f.dir || (l === "en" ? "ltr" : "rtl");
+    if (!f.long) el.type = f.url ? "url" : "text";
+    el.value = item.draft || "";
+    el.addEventListener("input", function(){ item.draft = el.value; el.classList.toggle("dirty", cDirty(item)); updateStatus(); });
+    return el;
+  }
+  function renderTexts(){
+    var box = $("textGroups"); box.innerHTML = "";
+    GROUPS.forEach(function(g){
+      var card = document.createElement("div"); card.className = "card group";
+      var h = document.createElement("h2"); h.textContent = g[lang]; card.appendChild(h);
+      g.fields.forEach(function(f){
+        var wrap = document.createElement("div"); wrap.className = "field";
+        var lab = document.createElement("label"); lab.textContent = f[lang]; wrap.appendChild(lab);
+        if (f.global) {
+          var inp = makeInput(cItem(f.key, "all"), f, "all", "c-" + f.key);
+          lab.htmlFor = inp.id; wrap.appendChild(inp);
+        } else {
+          var pair = document.createElement("div"); pair.className = "pair";
+          [["ar","العربية"],["en","English"]].forEach(function(x){
+            var d = document.createElement("div");
+            var s = document.createElement("small"); s.textContent = x[1];
+            var inp = makeInput(cItem(f.key, x[0]), f, x[0], "c-" + f.key + "-" + x[0]);
+            inp.setAttribute("aria-label", f[lang] + " – " + x[1]);
+            d.appendChild(s); d.appendChild(inp); pair.appendChild(d);
+          });
+          lab.htmlFor = "c-" + f.key + "-ar"; wrap.appendChild(pair);
+        }
+        if (f.hint) { var p = document.createElement("p"); p.className = "hint"; p.textContent = f.hint[lang]; wrap.appendChild(p); }
+        card.appendChild(wrap);
+      });
+      box.appendChild(card);
+    });
   }
 
-  $("saveBtn").addEventListener("click", async function(){
-    var dirty = rows.filter(isDirty);
-    if (!dirty.length) return;
-    var btn = $("saveBtn"); btn.disabled = true; btn.textContent = t("saving");
-    msg($("dashMsg"));
-    var results = await Promise.all(dirty.map(function(r){
-      return db.from("fuel_prices").update({ price_iqd: r.draftPrice, available: r.draftAvail }).eq("slug", r.slug).select();
-    }));
-    btn.textContent = t("save");
-    var failed = results.some(function(res){ return res.error || !res.data || !res.data.length; });
-    if (failed) { msg($("dashMsg"), t("saveErr")); updateStatus(); return; }
-    await load();
-    $("saveStatus").textContent = t("saved");
-    $("saveStatus").style.color = "var(--ok)";
+  // ================= Bilder =================
+  // Komprimerar bilden i webbläsaren innan uppladdning (WebP, max-storlek i pixlar)
+  async function compress(file, maxDim){
+    var bmp = await createImageBitmap(file);
+    var scale = Math.min(1, maxDim / Math.max(bmp.width, bmp.height));
+    var w = Math.round(bmp.width * scale), h = Math.round(bmp.height * scale);
+    var c = document.createElement("canvas"); c.width = w; c.height = h;
+    c.getContext("2d").drawImage(bmp, 0, 0, w, h);
+    var blob = await new Promise(function(res){ c.toBlob(res, "image/webp", 0.82); });
+    if (!blob || blob.type !== "image/webp") blob = await new Promise(function(res){ c.toBlob(res, "image/jpeg", 0.85); });
+    return blob;
+  }
+  async function uploadImage(file, folder, maxDim){
+    var blob = await compress(file, maxDim);
+    var ext = blob.type === "image/webp" ? "webp" : "jpg";
+    var path = folder + "/" + Date.now() + "-" + Math.random().toString(36).slice(2, 8) + "." + ext;
+    var up = await db.storage.from(BUCKET).upload(path, blob, { contentType: blob.type, cacheControl: "31536000" });
+    if (up.error) throw up.error;
+    return path;
+  }
+  async function setGlobalImage(key, path){
+    var old = (content[key + "|all"] || {}).value;
+    var res = await db.from("site_content").upsert({ key:key, lang:"all", value:path || "" }).select();
+    if (res.error || !res.data.length) throw res.error || new Error("save");
+    content[key + "|all"] = { value:path || "", draft:path || "" };
+    if (old) await db.storage.from(BUCKET).remove([old]);
+  }
+  function renderSlot(boxId, key, title, hint, maxDim, isLogo){
+    var box = $(boxId), cur = (content[key + "|all"] || {}).value;
+    box.innerHTML =
+      '<div class="slot"><div class="slot-img' + (isLogo ? " logo" : "") + '">' +
+      (cur ? '<img alt="" src="' + esc(imgUrl(cur)) + '">' : esc(t("noImage"))) + '</div>' +
+      '<div><h2>' + esc(t(title)) + '</h2><p class="hint">' + esc(t(hint)) + '</p><div class="slot-actions">' +
+      '<label class="btn btn-ghost file-btn" style="margin:0">' + esc(t(cur ? "replace" : "upload")) + '<input type="file" accept="image/*"></label>' +
+      (cur ? '<button class="btn btn-danger" type="button">' + esc(t("remove")) + '</button>' : '') +
+      '</div></div></div>';
+    box.querySelector("input[type=file]").addEventListener("change", async function(e){
+      var file = e.target.files[0]; if (!file) return;
+      msg($("dashMsg"), t("uploading"), "ok");
+      try { var path = await uploadImage(file, key.replace("_image", ""), maxDim); await setGlobalImage(key, path); msg($("dashMsg"), t("uploaded"), "ok"); }
+      catch(err){ msg($("dashMsg"), t("imgErr")); }
+      renderImages();
+    });
+    var rm = box.querySelector(".btn-danger");
+    if (rm) rm.addEventListener("click", async function(){
+      if (!confirm(t("confirmDelete"))) return;
+      try { await setGlobalImage(key, ""); msg($("dashMsg"), t("deleted"), "ok"); } catch(err){ msg($("dashMsg"), t("saveErr")); }
+      renderImages();
+    });
+  }
+  function galDirty(g){ return g.draftAr !== g.caption_ar || g.draftEn !== g.caption_en; }
+  function renderImages(){
+    renderSlot("slotHero", "hero_image", "heroTitle", "heroHint", 1600, false);
+    renderSlot("slotLogo", "logo_image", "logoTitle", "logoHint", 256, true);
+    var list = $("galleryList"); list.innerHTML = "";
+    if (!gallery.length) { list.innerHTML = '<div class="gal-empty">' + esc(t("galleryEmpty")) + '</div>'; return; }
+    gallery.forEach(function(g){
+      var it = document.createElement("div"); it.className = "gal-item";
+      it.innerHTML = '<img alt="" loading="lazy" src="' + esc(imgUrl(g.path)) + '"><div class="body">' +
+        '<input class="inp" dir="rtl" placeholder="' + esc(t("captionAr")) + '" aria-label="' + esc(t("captionAr")) + '">' +
+        '<input class="inp" dir="ltr" placeholder="' + esc(t("captionEn")) + '" aria-label="' + esc(t("captionEn")) + '">' +
+        '<button class="btn btn-danger" type="button">' + esc(t("remove")) + '</button></div>';
+      var ins = it.querySelectorAll("input");
+      ins[0].value = g.draftAr; ins[1].value = g.draftEn;
+      ins[0].addEventListener("input", function(){ g.draftAr = ins[0].value; ins[0].classList.toggle("dirty", g.draftAr !== g.caption_ar); updateStatus(); });
+      ins[1].addEventListener("input", function(){ g.draftEn = ins[1].value; ins[1].classList.toggle("dirty", g.draftEn !== g.caption_en); updateStatus(); });
+      it.querySelector(".btn-danger").addEventListener("click", async function(){
+        if (!confirm(t("confirmDelete"))) return;
+        var res = await db.from("gallery_images").delete().eq("id", g.id).select();
+        if (res.error || !res.data.length) { msg($("dashMsg"), t("saveErr")); return; }
+        await db.storage.from(BUCKET).remove([g.path]);
+        gallery = gallery.filter(function(x){ return x.id !== g.id; });
+        msg($("dashMsg"), t("deleted"), "ok"); renderImages(); updateStatus();
+      });
+      list.appendChild(it);
+    });
+  }
+  $("galleryInput").addEventListener("change", async function(e){
+    var files = Array.prototype.slice.call(e.target.files); e.target.value = "";
+    if (!files.length) return;
+    msg($("dashMsg"), t("uploading"), "ok");
+    var maxSort = gallery.reduce(function(m, g){ return Math.max(m, g.sort); }, 0), failed = false;
+    for (var i = 0; i < files.length; i++) {
+      try {
+        var path = await uploadImage(files[i], "gallery", 1600);
+        var res = await db.from("gallery_images").insert({ path:path, sort:maxSort + i + 1 }).select().single();
+        if (res.error) throw res.error;
+        gallery.push(Object.assign({}, res.data, { draftAr:"", draftEn:"" }));
+      } catch(err){ failed = true; }
+    }
+    msg($("dashMsg"), failed ? t("imgErr") : t("uploaded"), failed ? "err" : "ok");
+    renderImages();
   });
 
-  // Varna om man lämnar sidan med osparade ändringar
-  window.addEventListener("beforeunload", function(e){ if (rows.some(isDirty)) { e.preventDefault(); e.returnValue = ""; } });
+  // ================= Spara =================
+  function textChanges(){
+    return Object.keys(content).filter(function(k){ return cDirty(content[k]) && !/_image\|all$/.test(k); });
+  }
+  function dirtyCount(){
+    return prices.filter(priceDirty).length + textChanges().length + gallery.filter(galDirty).length;
+  }
+  function validationError(){
+    if (prices.some(function(p){ return priceDirty(p) && Number.isNaN(p.draftPrice); })) return t("badNum");
+    var m = content["maps_url|all"];
+    if (m && cDirty(m) && m.draft.trim() && !/^https:\/\//.test(m.draft.trim())) return t("badUrl");
+    return "";
+  }
+  function updateStatus(){
+    var n = dirtyCount(), bad = validationError();
+    $("saveBtn").disabled = !n || !!bad;
+    $("saveStatus").textContent = bad || (n ? t("unsaved")(n) : t("noChanges"));
+    $("saveStatus").style.color = bad ? "var(--err)" : "";
+  }
+  $("saveBtn").addEventListener("click", async function(){
+    if (!dirtyCount() || validationError()) return;
+    var btn = $("saveBtn"); btn.disabled = true; btn.textContent = t("saving"); msg($("dashMsg"));
+    var jobs = [];
+    prices.filter(priceDirty).forEach(function(p){
+      jobs.push(db.from("fuel_prices").update({ price_iqd:p.draftPrice, available:p.draftAvail }).eq("slug", p.slug).select());
+    });
+    var rows = textChanges().map(function(k){ var parts = k.split("|"); return { key:parts[0], lang:parts[1], value:content[k].draft.trim() }; });
+    if (rows.length) jobs.push(db.from("site_content").upsert(rows).select());
+    gallery.filter(galDirty).forEach(function(g){
+      jobs.push(db.from("gallery_images").update({ caption_ar:g.draftAr.trim(), caption_en:g.draftEn.trim() }).eq("id", g.id).select());
+    });
+    var results = await Promise.all(jobs);
+    btn.textContent = t("save");
+    if (results.some(function(r){ return r.error || !r.data || !r.data.length; })) { msg($("dashMsg"), t("saveErr")); updateStatus(); return; }
+    await loadAll();
+    $("saveStatus").textContent = t("saved"); $("saveStatus").style.color = "var(--ok)";
+  });
 
-  // ---------- Start ----------
+  window.addEventListener("beforeunload", function(e){ if (dirtyCount()) { e.preventDefault(); e.returnValue = ""; } });
+
+  // ================= Start =================
   applyLang();
   db.auth.getSession().then(function(res){
     var s = res.data && res.data.session;

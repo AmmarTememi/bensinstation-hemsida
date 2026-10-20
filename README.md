@@ -50,6 +50,18 @@ Logotyp: lägg `images/logo.svg` (eller `.png`) och ersätt `<span class="brand-
 
 **Kurdiska senare:** kopiera `index.html` till `ku/index.html`, ändra första raden till `<html lang="ckb" dir="rtl">`, översätt texterna, och lägg till en språkknapp och en `hreflang="ckb"`-rad som för engelskan.
 
+## Adminpanel (`/admin`)
+
+Logga in på `din-adress/admin` med ditt Supabase-konto.
+
+- **الأسعار / Priser** – pris i IQD per liter och om bränslet finns. Visas direkt på hemsidan.
+- **النصوص / Texter** – rubriker, beskrivningar, adress, telefon, kartlänk och öppettider på arabiska och engelska.
+- **الصور / Bilder** – huvudbild, logotyp och bildgalleri. Bilder komprimeras automatiskt.
+
+Texterna i HTML-filerna är reservtext som visas om databasen inte går att nå.
+Ny admin: skapa användaren i Supabase (Authentication → Users) och kör
+`insert into public.admins (user_id) select id from auth.users where email = 'EPOST';`
+
 ## 4. Publicera på internet (gratis)
 
 **Snabbast – Netlify Drop:**
